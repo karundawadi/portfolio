@@ -1,0 +1,41 @@
+#dropdownMenuButton{
+    color: white;
+}
+#mainDiv{
+    padding:20px;
+}
+
+@media (min-width: 576px) { 
+    #mainDiv{
+        margin: auto;
+        width: 70%;
+    }
+ }
+
+@media (min-width: 768px) { 
+    #mainDiv{
+        margin: auto;
+        width: 70%;
+    }
+ }
+
+@media (min-width: 992px) {
+    #mainDiv{
+        margin: auto;
+        width: 58%;
+    }
+ }
+
+@media (min-width: 1200px) { 
+    #mainDiv{
+        margin: auto;
+        width: 50%;
+    }
+ }
+
+@media (min-width: 1400px) { 
+    #mainDiv{
+        margin: auto;
+        width: 50%;
+    }
+ }
