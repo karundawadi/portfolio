@@ -22,20 +22,26 @@
 @media (min-width: 992px) {
     #mainDiv{
         margin: auto;
-        width: 58%;
+        width: 55%;
     }
  }
 
 @media (min-width: 1200px) { 
     #mainDiv{
         margin: auto;
-        width: 50%;
+        width: 38%;
     }
  }
 
 @media (min-width: 1400px) { 
     #mainDiv{
         margin: auto;
-        width: 50%;
+        width: 38%;
     }
+ }
+ #professionalPic{
+    display:block;
+    margin:auto;
+    width: 100%;
+    padding-bottom: 10px;
  }
