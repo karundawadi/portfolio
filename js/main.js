@@ -10,3 +10,9 @@
 var scrollSpy = new bootstrap.ScrollSpy(document.body, {
     target: '#navbar-example2'
   })
+
+// For the carosuel in project section
+$('.carousel').carousel({
+  interval: 1, 
+  keyboard:true,
+})

@@ -22,7 +22,7 @@
 @media (min-width: 992px) {
     #mainDiv{
         margin: auto;
-        width: 55%;
+        width: 59%;
     }
  }
 
@@ -48,4 +48,9 @@
 
 a:hover{
     cursor: pointer;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
 }
