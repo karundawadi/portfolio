@@ -54,3 +54,7 @@ a:hover{
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #006400 !important;
+}
