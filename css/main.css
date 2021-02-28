@@ -4,8 +4,19 @@
 #mainDiv{
     padding:20px;
 }
-
+#professionalPic{
+    display:block;
+    margin:auto;
+    width: 100%;
+    padding-bottom: 10px;
+}
 @media (min-width: 576px) { 
+    #professionalPic{
+        display:block;
+        margin:auto;
+        width: 100%;
+        padding-bottom: 10px;
+    }
     #mainDiv{
         margin: auto;
         width: 70%;
@@ -13,6 +24,12 @@
  }
 
 @media (min-width: 768px) { 
+    #professionalPic{
+        display:block;
+        margin:auto;
+        width: 100%;
+        padding-bottom: 10px;
+    }
     #mainDiv{
         margin: auto;
         width: 70%;
@@ -20,6 +37,12 @@
  }
 
 @media (min-width: 992px) {
+    #professionalPic{
+        display:block;
+        margin:auto;
+        width: 100%;
+        padding-bottom: 10px;
+    }
     #mainDiv{
         margin: auto;
         width: 59%;
@@ -27,6 +50,12 @@
  }
 
 @media (min-width: 1200px) { 
+    #professionalPic{
+        display:block;
+        margin:auto;
+        width: 100%;
+        padding-bottom: 10px;
+    }
     #mainDiv{
         margin: auto;
         width: 38%;
@@ -34,16 +63,16 @@
  }
 
 @media (min-width: 1400px) { 
+    #professionalPic{
+        display:block;
+        margin:auto;
+        width: 60%;
+        padding-bottom: 10px;
+    }
     #mainDiv{
         margin: auto;
-        width: 38%;
+        width: 48%;
     }
- }
- #professionalPic{
-    display:block;
-    margin:auto;
-    width: 100%;
-    padding-bottom: 10px;
  }
 
 a:hover{
@@ -52,7 +81,7 @@ a:hover{
 
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
-    filter: invert(100%);
+    /* filter: invert(100%); */
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
