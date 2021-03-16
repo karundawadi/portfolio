@@ -1,92 +1,103 @@
 /* #dropdownMenuButton{
     color: white;
 } */
-.particleBg{
+.particleBg {
     z-index: -10;
     position: fixed;
-    top:0;
+    top: 0;
     width: 100%;
     height: 100vh;
 }
-#mainDiv{
-    padding:20px;
+
+#mainDiv {
+    padding: 20px;
     background-color: white;
 }
-#professionalPic{
-    display:block;
-    margin:auto;
+
+#professionalPic {
+    display: block;
+    margin: auto;
     width: 100%;
     padding-bottom: 10px;
 }
-@media (min-width: 576px) { 
-    #professionalPic{
-        display:block;
-        margin:auto;
-        width: 100%;
-        padding-bottom: 10px;
-    }
-    #mainDiv{
-        margin: auto;
-        width: 70%;
-    }
- }
 
-@media (min-width: 768px) { 
-    #professionalPic{
-        display:block;
-        margin:auto;
+@media (min-width: 576px) {
+    #professionalPic {
+        display: block;
+        margin: auto;
         width: 100%;
         padding-bottom: 10px;
     }
-    #mainDiv{
+
+    #mainDiv {
         margin: auto;
         width: 70%;
     }
- }
+}
+
+@media (min-width: 768px) {
+    #professionalPic {
+        display: block;
+        margin: auto;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+
+    #mainDiv {
+        margin: auto;
+        width: 70%;
+    }
+}
 
 @media (min-width: 992px) {
-    #professionalPic{
-        display:block;
-        margin:auto;
+    #professionalPic {
+        display: block;
+        margin: auto;
         width: 100%;
         padding-bottom: 10px;
     }
-    #mainDiv{
+
+    #mainDiv {
         margin: auto;
         width: 59%;
     }
- }
+}
 
-@media (min-width: 1200px) { 
-    #professionalPic{
-        display:block;
-        margin:auto;
+@media (min-width: 1200px) {
+    #professionalPic {
+        display: block;
+        margin: auto;
         width: 100%;
         padding-bottom: 10px;
     }
-    #mainDiv{
+
+    #mainDiv {
         margin: auto;
         width: 50%;
     }
- }
+}
 
-@media (min-width: 1400px) { 
-    #professionalPic{
-        display:block;
-        margin:auto;
+@media (min-width: 1400px) {
+    #professionalPic {
+        display: block;
+        margin: auto;
         width: 100%;
         padding-bottom: 10px;
     }
-    #mainDiv{
+
+    #mainDiv {
         margin: auto;
         width: 50%;
     }
- }
+}
 
-a:hover{
+a:hover {
     cursor: pointer;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
     background-color: #006400 !important;
 }
