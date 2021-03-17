@@ -19,17 +19,18 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
-  <script src="js/main.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>  
 </head>
 
 <body>
   <!-- To turn off particle js in mobile view -->
-  <!-- <div class="d-none d-md-block">
-    <div id="particles-js" class="particleBg">
+  <div class="d-none d-md-block">
+    <div id="particles-js">
     </div>
-  </div> -->
+  </div>
   <div class="text-center">
-    <h1 style="margin-bottom: 0;padding-top: 10px;" class="h2 display-2"><strong>Karun Dawadi</strong></h1>
+    <h1 style="margin-bottom: 0;padding-top: 10px;" class="h2 display-2"><strong style="background-color: white;">Karun Dawadi</strong></h1>
   </div>
   <!-- Navigation Bar -->
   <div class="sticky-top" style="background-color: white;">
@@ -44,7 +45,7 @@
             <li class="nav-item p-1">
               <button type="button" class="nav-item dropdown-toggle btn btn-outline-dark" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</i></button>
-              <ul class="dropdown-menu" style="background-color: white;" aria-labelledby="dropdownMenuButton">
+              <ul class="dropdown-menu" style="background-color: transparent;" aria-labelledby="dropdownMenuButton">
                 <li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#exampleModal">FAT32 File
                     System</a></li>
                 <li class="nav-item"><a href="https://github.com/karundawadi/elsa" class="nav-link" target="_blank"
@@ -97,9 +98,8 @@
   <div id="bodyDiv">
     <div id="mainDiv">
       <div class="col-md-auto" id="aboutMe">
-
         <!-- In case for md or lower version  -->
-        <div class="d-none d-sm-block d-md-none">
+        <div class="d-block d-sm-block d-md-none">
           <img id="professionalPic" src="img\rectangle_professional_image.jpg" class="rounded" alt="Fort Worth, TX">
           <p class="h3">Hello World!</p>
           <p></p>
@@ -268,7 +268,5 @@
     <p style="font-size: small;"><em>&copy<a style="text-decoration: none;color: black;" href="#">Karun Dawadi</a></em>
     </p>
   </div>
-  <!-- <script src="js/particles.js"></script>
-  <script src="js/app.js"></script> -->
 </body>
 </html>
