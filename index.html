@@ -165,9 +165,36 @@
           </div>
         </div>
         <p></p>
+
         <!-- Project Section -->
         <p class="h5"><u>Projects</u></p>
-        <div class="card w-55">
+
+        <!-- Same information presented in both div's-->
+        <div class="d-none d-md-block">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- This view is for devices smaller than md-->
+        <div class="card w-55 d-md-none d-lg-none d-xl-none">
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <div class="row">
@@ -232,8 +259,8 @@
 
         <dl class="row">
           <dt class="col-sm-3">Languages</dt>
-          <dd class="col-sm-9">Python, C, Swift, C++, SQL, Java, JavaScript, Regex, HTML/CSS</dd>
-
+          <dd class="col-sm-9">
+            Python, C, Swift, C++, SQL, Java, JavaScript, Regex, HTML/CSS</dd>
           <dt class="col-sm-3">Operating Systems</dt>
           <dd class="col-sm-9">
             <p>MacOS, Windows, Fedora, Ubuntu, iOS, Android</p>
