@@ -104,4 +104,12 @@ a:hover {
 .btn-primary:visited {
     background-color: #006400 !important;
 }
-
+/* For tooltip */
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #000;
+    text-align: center;
+    background-color: white;
+    border-radius: .25rem;
+}
