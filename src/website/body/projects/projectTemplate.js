@@ -10,6 +10,8 @@ function SaveCash(props){
             actualDescription = {props.actualDescription}
             gitHubLink = {props.gitHubLink}
             modalDescription = {props.modalDescription}
+            imageLink = {props.imageLink}
+            imagealt = {props.imagealt}
         />
     )
 }

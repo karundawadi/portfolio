@@ -6,10 +6,16 @@ import LinkRow from "./link_row/link_row"
 function NavigationBar() {
     return (
         <Container>
-            <Box component="span" sx={{ paddingTop:2,display: 'block', textAlign:'center' }}>
+            <Box component="span" sx={{ 
+                paddingTop:2,
+                display: 'block', 
+                textAlign:'center',
+            }}>
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
-                        <Typography variant="h2">Karun Dawadi</Typography>
+                        <Typography variant="h2" onClick={()=>{
+                            window.open("/","_self")
+                        }}>Karun Dawadi</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <ProjectRow/>

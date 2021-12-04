@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Container, Card, Modal, CardContent, Typography, CardActions, Button  } from "@mui/material"
+import { Box, Container, CardMedia, Card, Modal, CardContent, Typography, CardActions, Button, useTheme  } from "@mui/material"
 import {BsGithub} from 'react-icons/bs'
 
 const style = {
@@ -18,9 +18,9 @@ function TemplateCard(props){
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
+    const theme = useTheme()
     return (
-        <React.Fragment>
+        <Box>
             <Modal
             open={open}
             onClose={handleClose}
@@ -74,8 +74,21 @@ function TemplateCard(props){
                 </Box>
             </Modal>
 
-        <Box sx={{width:'50%',padding:1,overflow:'hidden'}}>
+        <Box sx={
+            {
+                [theme.breakpoints.down('sm')]: {
+                    width:'100%'
+                },
+                padding:1,
+                overflow:'hidden',
+            }}>
             <Card variant="outlined">
+                <CardMedia
+                    component="img"
+                    height="100"
+                    image={props.imageLink}
+                    alt={props.imagealt}
+                />
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {props.LanguagesUsed}
@@ -91,13 +104,16 @@ function TemplateCard(props){
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="error" onClick={()=>{
+                    <Button size="small" color="primary" onClick={()=>{
                         handleOpen()
                     }}>More Details</Button>
+                    <Button size="small" color="primary" onClick={()=>{
+                        window.open(props.gitHubLink)
+                    }}>Github</Button>
                 </CardActions>
             </Card>
         </Box>
-        </React.Fragment>
+        </Box>
     )
 }
 export default TemplateCard
