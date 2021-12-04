@@ -11,7 +11,7 @@ function Introduciton(){
                         <Box sx={{
                             
                         }}>
-                            <Image src="https://karundawadi.com/img/professional_image.jpg" thumbnail rounded />
+                            <Image src="https://raw.githubusercontent.com/karundawadi/portfolio/main/img/professional_image.jpg" thumbnail rounded />
                         </Box>
                     </Grid>
                 <Grid item xs={12} md={7}>
