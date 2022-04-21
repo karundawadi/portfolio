@@ -1,20 +1,49 @@
+import { Box, Typography } from "@mui/material"
 import React from "react"
 import { Navbar, Nav, NavDropdown } from "react-bootstrap"
-function ProjectRow(params) {
+import {RiSunFill, RiSunLine} from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { useTheme } from "@emotion/react";
+
+function ProjectRow(props) {
+    const dark_light =  props.dark ? "dark" : "light"
+    const theme = useTheme()
     return (
-        <Navbar bg="light" sticky="top">
+        <Navbar bg={dark_light} variant={dark_light} sticky="top">
             <div className="btn-group mx-auto">
                 <Nav className="me-auto">
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Projects</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                    <Nav.Link href="#home">Contact Me</Nav.Link>
-                    <Nav.Link href="#link">Resume</Nav.Link>
-                </Nav>
+                    <Nav.Link>
+                        <Link style={{
+                            textDecoration:'none',
+                            color:props.dark?"white":'black'
+                        }} to="/blog">
+                            Blog
+                        </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link style={{
+                            textDecoration:'none',
+                            color:props.dark?"white":'black'
+                        }}
+                        to="/project">
+                            Projects
+                        </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link style={{
+                            textDecoration:'none',
+                            color:props.dark?"white":'black'
+                        }} 
+                        to="/">
+                            About Me
+                        </Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Typography onClick={()=>{
+                            props.changeMode(!props.dark)
+                        }} color = {props.dark? "orange":"black"}><RiSunFill/></Typography> 
+                    </Nav.Link>
+                </Nav> 
             </div>
         </Navbar>
     )

@@ -28,6 +28,7 @@ function Project(){
             <Box sx={{
                 paddingTop:2
             }}>
+                <Typography paddingLeft={1} variant="h6">Here are some of my open source projects.</Typography>
                 <Box sx={boxStylesCuston(theme)}>
                     <ProjectTemplate 
                         LanguagesUsed = "Python, C, C++"

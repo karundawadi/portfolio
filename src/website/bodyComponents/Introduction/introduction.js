@@ -5,15 +5,17 @@ import {Image} from 'react-bootstrap'
 function Introduciton(){
     const theme = useTheme()
     return (
-        <Container>
+        <Container style={{
+            paddingTop:4
+        }}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={5}>
-                        <Box sx={{
-                            
-                        }}>
-                            <Image src="https://raw.githubusercontent.com/karundawadi/portfolio/main/img/professional_image.jpg" thumbnail rounded />
-                        </Box>
-                    </Grid>
+                    <Box sx={{
+                        
+                    }}>
+                        <Image src="https://raw.githubusercontent.com/karundawadi/portfolio/main/img/professional_image.jpg" fluid rounded/>
+                    </Box>
+                </Grid>
                 <Grid item xs={12} md={7}>
                     <Box sx={{
                     }}>

@@ -1,31 +1,39 @@
 import React from "react"
-import { Container, Box } from "@mui/material"
-import NavigationBar from "./navbar/navigationBar"
-import Body from "./body/body"
-import Footer from "./footer/footer"
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import About from "./routes/about"
+import Blogs from "./routes/blogs"
+import Projects from "./routes/projects"
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            main:'#647c2e', 
-            // For the color of buttons
-        },
-    },
-});
+import CssBaseline from '@mui/material/CssBaseline';
 
 function WebSite() {
+    const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    const [value, setValue] = React.useState(0);
+
     return (
-        <ThemeProvider theme={theme}>
-            <Box style={{
-            }}>
-                <Container maxWidth="md"> 
-                    <NavigationBar/>
-                    <Body/>
-                    <Footer/>
-                </Container>
-            </Box>
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={
+                createTheme({
+                    palette: {
+                        primary: {
+                            main:'#647c2e', 
+                            // For the color of buttons,
+                        },
+                        mode:darkMode?"dark":"light",
+                    },
+                })}>
+                <CssBaseline />
+                <Routes>
+                    <Route path="/" element={<About changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="blog" element={<Blogs changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="project" element={<Projects changeMode={changeDarkMode} dark={darkMode}/>} />
+                </Routes>
+            </ThemeProvider>
+        </BrowserRouter>
     )
 }
 
