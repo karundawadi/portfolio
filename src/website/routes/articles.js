@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Box, Typography, Paper } from "@mui/material"
-import NavigationBar from "../navbar/navigationBar"
+import ProjectRow from "../navbar/project row/project_row"
 import Footer from "../footer/footer"
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,16 @@ function Articles(props) {
               <title>Articles</title>
             </Helmet>
             <Container maxWidth="md"> 
-                <NavigationBar dark={props.dark} changeMode={props.changeMode}/>
+                <Typography 
+                    variant="h2" 
+                    onClick={()=>{
+                        window.open("/","_self")
+                    }} 
+                    fontWeight={335} 
+                    align={'center'}
+                    >Karun Dawadi</Typography>
+                <ProjectRow dark={props.dark} changeMode={props.changeMode}/>
+                <Box sx={{paddingTop:'2%'}}></Box>
                 <Typography variant="h6">2022</Typography>
                 <TableContainer sx={{
                 }}>

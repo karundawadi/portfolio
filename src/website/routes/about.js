@@ -15,6 +15,7 @@ function About(props) {
             </Helmet>
             <Container maxWidth="md"> 
                 <NavigationBar dark={props.dark} changeMode={props.changeMode}/>
+                <Box sx={{paddingTop:'2%'}}></Box>
                 <Introduciton/>
                 <Kala/>
                 <Footer/>
