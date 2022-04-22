@@ -16,8 +16,8 @@ function ProjectRow(props) {
                         <Link style={{
                             textDecoration:'none',
                             color:props.dark?"white":'black'
-                        }} to="/blog">
-                            Blog
+                        }} to="/article">
+                            Articles
                         </Link>
                     </Nav.Link>
                     <Nav.Link>

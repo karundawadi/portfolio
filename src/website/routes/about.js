@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Box } from "@mui/material"
 import Footer from "../footer/footer"
 import Introduciton from '../bodyComponents/Introduction/introduction'
-import Skills from '../bodyComponents/skills/Skills'
+import Kala from '../bodyComponents/kala/kala'
 import NavigationBar from '../navbar/navigationBar'
 import {Helmet} from "react-helmet";
 
@@ -16,7 +16,7 @@ function About(props) {
             <Container maxWidth="md"> 
                 <NavigationBar dark={props.dark} changeMode={props.changeMode}/>
                 <Introduciton/>
-                <Skills/>
+                <Kala/>
                 <Footer/>
             </Container>
         </Box>
