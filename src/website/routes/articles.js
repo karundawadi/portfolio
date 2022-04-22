@@ -44,6 +44,26 @@ function Articles(props) {
                         
                     </Table>
                 </TableContainer>
+                
+                <Box sx={{paddingTop:'2%'}}></Box>
+
+                <Typography variant="h6">2019</Typography>
+                <TableContainer sx={{
+                }}>
+                    <Table>
+                        {/* First Artilce */}
+                        <TableRow 
+                            hover 
+                            onClick={()=>{
+                                navigate("insideOut")
+                            }}
+                        >
+                            <TableCell align="left">What is inside the mind of a 11-year old?</TableCell>
+                            <TableCell align="right">January 21</TableCell>
+                        </TableRow>
+                        
+                    </Table>
+                </TableContainer>
                 <Footer/>
             </Container>
         </Box>
