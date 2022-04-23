@@ -1,7 +1,6 @@
 import React from "react"
-import ProjectTemplate from "./projectTemplate"
-import {Typography, Box, Container, useTheme } from "@mui/material" 
-import ModalTemplate from "./Template/modal_template"
+import {Typography, Box, Container, useTheme, Card, CardActions, CardContent, CardMedia, Button } from "@mui/material" 
+import TemplateCard from "./Template/template_card"
 
 function boxStylesCuston(theme){
     return {
@@ -9,16 +8,8 @@ function boxStylesCuston(theme){
             flexDirection: 'column',
         },
         display: 'flex',
-        justifyContent:'center',
+        paddingTop:'2%'
     }
-}
-
-function AddTypography(values){
-    return (
-        <Typography>
-            {values.text}
-        </Typography>
-    )
 }
 
 function Project(){
@@ -28,132 +19,50 @@ function Project(){
             <Box sx={{
                 paddingTop:2
             }}>
-                <Typography paddingLeft={1} variant="h6">Here are some of my open source projects.</Typography>
-                <Box sx={boxStylesCuston(theme)}>
-                    <ProjectTemplate 
-                        LanguagesUsed = "Python, C, C++"
-                        projectTitle = "DaveCash"
-                        shortDescription = "A financial Application"
-                        actualDescription = "You already know what this is"
-                        gitHubLink = "https://github.com/karundawadi/WTWT"
-                        imageLink = "https://www.google.com/logos/doodles/2021/seasonal-holidays-2021-6753651837109324-6752733080595603-cst.gif"
-                        imagealt = "Google"
-                        modalDescription = {
-                            <ModalTemplate 
-                                descripton = "Enter the description. Make sure the description is a bit longer than the actual website. "
-                                steps={
-                                    <ol>
-                                        <li>
-                                            <AddTypography text="Step 1"/>
-                                        </li>
-                                        <li>
-                                            <AddTypography text="Step 2"/>
-                                        </li>
-                                        <li>
-                                            <AddTypography text="Step 3"/>
-                                        </li>
-                                        <li>
-                                            <AddTypography text="Step 4"/>
-                                        </li>
-                                    </ol>
-                                }
-                                userStories={
-                                    <ul>
-                                        <li>
-                                            <AddTypography text="Feature one"/> 
-                                            <ul> 
-                                                <li>Sub-description of the feature </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            Feature two 
-                                        <ul>
-                                            <li>Sub-description of the feature </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                }
-                                image1="https://images.unsplash.com/photo-1603937606336-89e39e67d32f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmlnJTIwYnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80"
-                                image1Alt="Hello?"
-                                image2 = "https://s3.studytonight.com/curious/uploads/pictures/1632120146-79542.gif"
-                                image2Alt="Again?"
-                                videoLink = "https://www.youtube.com/embed/tgbNymZ7vqY"
-                                dependencies= {["Python","C"]}
-                            />
-                        }
-                    />
-                    <ProjectTemplate 
-                        LanguagesUsed = "Python, C, C++"
-                        projectTitle = "SaveCash"
-                        shortDescription = "A financial Application"
-                        actualDescription = "You already know what this is"
-                        gitHubLink = "https://github.com/karundawadi/WTWT"
-                        imageLink = "https://www.google.com/logos/doodles/2021/seasonal-holidays-2021-6753651837109324-6752733080595603-cst.gif"
-                        imagealt = "Google"
-                        modalDescription = {
-                            <Box>
-                                {/* Enter contents here  */}
-                            </Box>
-                        }
-                    />
-                    <ProjectTemplate 
-                        LanguagesUsed = "Python, C, C++"
-                        projectTitle = "SaveCash"
-                        shortDescription = "A financial Application"
-                        actualDescription = "You already know what this is"
-                        gitHubLink = "https://github.com/karundawadi/WTWT"
-                        imageLink = "https://www.google.com/logos/doodles/2021/seasonal-holidays-2021-6753651837109324-6752733080595603-cst.gif"
-                        imagealt = "Google"
-                        modalDescription = {
-                            <Box>
-                                {/* Enter contents here  */}
-                            </Box>
-                        }
-                    />
-                </Box>
-                <Box sx={boxStylesCuston(theme)}>
-                    <ProjectTemplate 
-                        LanguagesUsed = "Python, C, C++"
-                        projectTitle = "SaveCash"
-                        shortDescription = "A financial Application"
-                        actualDescription = "You already know what this is"
-                        gitHubLink = "https://github.com/karundawadi/WTWT"
-                        imageLink = "https://www.google.com/logos/doodles/2021/seasonal-holidays-2021-6753651837109324-6752733080595603-cst.gif"
-                        imagealt = "Google"
-                        modalDescription = {
-                            <Box>
-                                {/* Enter contents here  */}
-                            </Box>
-                        }
+                <Typography variant="h6">
+                    Few of my open source projects. Find all my other projects on <span  
+                    onClick={()=>{
+                        window.open("https://github.com/karundawadi")
+                    }}
+                    style={{
+                        color:'green',
+                        textDecoration:'underline'
+                    }}
+                    >Github</span>
+                </Typography>
+
+                <Box sx={{
+                    ...boxStylesCuston(theme),
+                }}>
+                    <TemplateCard 
+                            LanguagesUsed={"TypeScript, React Native"} 
+                            projectTitle={'SaveCash'}
+                            shortDescription={"Mobile application designed to make managing money easier."}
+                            actualDescription={"SaveCash is an open source mobile application designed to make managing money easier.It does all this within your device allowing you to worry less about privacy and focus more on your finances."}
+                            gitHubLink = {'https://github.com/karundawadi/SaveCash'}
+                            imageLink = {"https://raw.githubusercontent.com/karundawadi/SaveCash/main/assets/adaptive-icon.png"}
+                            imagealt = {'Landing Page'}
+                        />
+                        
+                    
+                    <TemplateCard 
+                        LanguagesUsed={"Python, JavaScript, HTML, CSS, React"} 
+                        projectTitle={'WTWT'}
+                        shortDescription={"A web application that recommends movies."}
+                        actualDescription={"What to watch tonight is a movie recommendation system that uses collaborative filtering algorithms to suggest movies to users."}
+                        gitHubLink = {'https://github.com/karundawadi/WTWT'}
+                        imageLink = {"https://www.site-shot.com/cached_image/SrsagsKdEeyvIgJCrBEABA"}
+                        imagealt = {'WTWT live demo'}
                     />
                     
-                    <ProjectTemplate 
-                        LanguagesUsed = "Python, C, C++"
-                        projectTitle = "SaveCash"
-                        shortDescription = "A financial Application"
-                        actualDescription = "You already know what this is"
-                        gitHubLink = "https://github.com/karundawadi/WTWT"
-                        imageLink = "https://www.google.com/logos/doodles/2021/seasonal-holidays-2021-6753651837109324-6752733080595603-cst.gif"
-                        imagealt = "Google"
-                        modalDescription = {
-                            <Box>
-                                {/* Enter contents here  */}
-                            </Box>
-                        }
-                    />
-                    <ProjectTemplate 
-                        LanguagesUsed = "Python, C, C++"
-                        projectTitle = "SaveCash"
-                        shortDescription = "A financial Application"
-                        actualDescription = "You already know what this is"
-                        gitHubLink = "https://github.com/karundawadi/WTWT"
-                        imageLink = "https://www.google.com/logos/doodles/2021/seasonal-holidays-2021-6753651837109324-6752733080595603-cst.gif"
-                        imagealt = "Google"
-                        modalDescription = {
-                            <Box>
-                                {/* Enter contents here  */}
-                            </Box>
-                        }
+                    <TemplateCard 
+                        LanguagesUsed={"Python"} 
+                        projectTitle={'Robotic Arm'}
+                        shortDescription={"A Lego robot capable of drwaring complex shapes."}
+                        actualDescription={"Robotic Arm utilized inverse kinematics to estimate the points required to draw a shape. Then, it used the motors to draw the actual shape."}
+                        gitHubLink = {'https://github.com/karundawadi/roboticArm'}
+                        imageLink = {"https://raw.githubusercontent.com/karundawadi/roboticArm/main/pictures/robot.jpg"}
+                        imagealt = {'WTWT live demo'}
                     />
                 </Box>
             </Box>

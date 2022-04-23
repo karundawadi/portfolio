@@ -51,7 +51,15 @@ function Articles(props) {
                 <TableContainer sx={{
                 }}>
                     <Table>
-                        {/* First Artilce */}
+                        <TableRow 
+                            hover 
+                            onClick={()=>{
+                                navigate("canSpam")
+                            }}
+                        >
+                            <TableCell align="left">Can Spam Act of 2003</TableCell>
+                            <TableCell align="right">Feburary 20</TableCell>
+                        </TableRow>
                         <TableRow 
                             hover 
                             onClick={()=>{
@@ -60,6 +68,15 @@ function Articles(props) {
                         >
                             <TableCell align="left">What is inside the mind of a 11-year old?</TableCell>
                             <TableCell align="right">January 21</TableCell>
+                        </TableRow>
+                        <TableRow 
+                            hover 
+                            onClick={()=>{
+                                navigate("problemsWithPlastic")
+                            }}
+                        >
+                            <TableCell align="left">The problems with plastic and how to solve them</TableCell>
+                            <TableCell align="right">January 19</TableCell>
                         </TableRow>
                         
                     </Table>

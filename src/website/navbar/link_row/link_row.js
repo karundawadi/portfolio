@@ -3,6 +3,7 @@ import { Box} from "@mui/material"
 import { BsGithub, BsLinkedin, BsEnvelope, BsFileEarmarkText } from 'react-icons/bs'
 
 function LinkRow(params) {
+    const resumeLocation = "../../assets/Resume.pdf"
     return (
         <Box sx={{ 
                 flexDirection: 'row',
@@ -10,30 +11,43 @@ function LinkRow(params) {
                 justifyContent:'center',
             }}>
             
-            <BsGithub style={{
+            <BsGithub 
+            style={{
                 padding:4,
                 fontSize: 'x-large'
-            }} />
+            }} 
+            onClick={()=>{
+                window.open("https://github.com/karundawadi")
+            }}
+            />
             
-            <BsLinkedin style={{
-                padding:4,
-                fontSize: 'x-large'
-            }} onClick={()=>{
-                window.open("https://www.google.com/")
-            }}/>
+            <BsLinkedin 
             
-            <BsEnvelope style={{
+            style={{
                 padding:4,
                 fontSize: 'x-large'
-            }} onClick={()=>{
-                window.open("https://www.google.com/")
+            }} 
+            onClick={()=>{
+                window.open("https://www.linkedin.com/in/karundawadi/")
+            }}
+            />
+            
+            <BsEnvelope 
+            style={{
+                padding:4,
+                fontSize: 'x-large'
+            }} 
+            onClick={()=>{
+                window.open("mailto:someone@yoursite.com?subject=In regards to")
             }}/>
 
-            <BsFileEarmarkText  style={{
+            <BsFileEarmarkText  
+            style={{
                 padding:4,
                 fontSize: 'x-large'
-            }} onClick={()=>{
-                window.open("https://www.google.com/")
+            }} 
+            onClick={()=>{
+                window.open(resumeLocation)
             }}/>
         </Box>
     )

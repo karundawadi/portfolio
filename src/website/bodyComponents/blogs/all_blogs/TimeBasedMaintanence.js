@@ -47,7 +47,7 @@ function TimeBasedMaintanence(props) {
                       navigate("/")
                     }}>Karun Dawadi</span>, Published on <span onClick={()=>{
                       navigate("/article")
-                    }}>April 22</span></Typography>
+                    }}>April 22, 2022</span></Typography>
                   </Box>
 
                   {breakPara()}

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container, Box } from "@mui/material"
-import Footer from "../footer/footer"
 import Introduciton from '../bodyComponents/Introduction/introduction'
 import Kala from '../bodyComponents/kala/kala'
 import NavigationBar from '../navbar/navigationBar'
@@ -18,7 +17,6 @@ function About(props) {
                 <Box sx={{paddingTop:'2%'}}></Box>
                 <Introduciton/>
                 <Kala/>
-                <Footer/>
             </Container>
         </Box>
     )

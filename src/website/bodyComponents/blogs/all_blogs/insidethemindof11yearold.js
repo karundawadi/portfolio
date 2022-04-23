@@ -1,11 +1,12 @@
-import React from 'react'
-import { Container, Box, Typography } from "@mui/material"
-import Footer from "../../../footer/footer"
-import ProjectRow from '../../../navbar/project row/project_row'
+import React from 'react';
+import { Container, Box, Typography } from "@mui/material";
+import Footer from "../../../footer/footer";
+import ProjectRow from '../../../navbar/project row/project_row';
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router-dom';
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
 import { useTheme } from '@emotion/react';
+
 function InsideOutReview(props) {
   const breakPara = ()=>{return <Box sx={{paddingTop:'4%'}}/>}
   const theme = useTheme()
@@ -48,7 +49,7 @@ function InsideOutReview(props) {
                         navigate("/")
                         }}>Karun Dawadi</span>, Published on <span onClick={()=>{
                         navigate("/article")
-                        }}>January 21</span></Typography>
+                        }}>January 21, 2019</span></Typography>
                     </Box>
                 </Box>
 

@@ -4,6 +4,7 @@ import {Image} from 'react-bootstrap'
 
 function Introduciton(){
     const theme = useTheme()
+    const breakPara = ()=>{return <Box sx={{paddingTop:'2%'}}/>}
     return (
         <Container style={{
             paddingTop:4
@@ -19,14 +20,16 @@ function Introduciton(){
                 <Grid item xs={12} md={7}>
                     <Box sx={{
                     }}>
-                        <Typography>
+                        <Typography variant="body1">
                             Hello World!
                         </Typography>
-                        <Typography>
-                            My name is Karun Dawadi. I am currently a junior pursuing a bachelor's degree in computer science at the University of Texas at Arlington. The University of Texas at Arlington is a school affilated with the UT System and is located at Arlington, Texas.
+                        {breakPara()}
+                        <Typography variant="body1">
+                            My name is Karun Dawadi. I am currently a graduating senior pursuing a bachelor's degree in computer science at the University of Texas at Arlington. The University of Texas at Arlington is a school affilated with the UT System and is located at Arlington, Texas.
                         </Typography>
-                        <Typography>
-                            I am very interested in Software developement and based on this intrest I am done various projects, which I have attached in the next section.
+                        {breakPara()}
+                        <Typography variant="body1">
+                            I am very interested in Software developement and based on this intrest I am done various projects, which can be found in the projects section.
                         </Typography>
                     </Box>
                 </Grid>

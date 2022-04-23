@@ -11,6 +11,8 @@ import TimeBasedMaintanence from "./bodyComponents/blogs/all_blogs/TimeBasedMain
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
 import InsideOutReview from "./bodyComponents/blogs/all_blogs/insidethemindof11yearold";
+import ProblemsWithPlastic from "./bodyComponents/blogs/all_blogs/problemswithplastic";
+import CanSpam from "./bodyComponents/blogs/all_blogs/canSPAM";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -31,6 +33,8 @@ function WebSite() {
                     <Route path="project" element={<Projects changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/timeBasedMaintanence" element={<TimeBasedMaintanence changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/insideOut" element={<InsideOutReview changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="article/problemsWithPlastic" element={<ProblemsWithPlastic changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="article/canSpam" element={<CanSpam changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
         </BrowserRouter>
