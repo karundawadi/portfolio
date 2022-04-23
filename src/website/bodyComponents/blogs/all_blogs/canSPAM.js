@@ -15,7 +15,7 @@ function CanSpam(props) {
         <Box style={{
         }}>
             <Helmet>
-              <title>{props.title}</title>
+              <title>CAN Spam Act 2003</title>
               <script src="https://giscus.app/client.js"
                   data-repo="karundawadi/portfolio-comments"
                   data-repo-id="R_kgDOHODkgA"
@@ -94,7 +94,7 @@ function CanSpam(props) {
                 }}>Works Cited :</span></Typography>
 
                 {breakPara()}
-                
+
                 <Typography variant="body2">Kigerl, Alex C. “Deterring Spammers: Impact Assessment of the CAN SPAM Act on Email Spam Rates.” Criminal Justice Policy Review, vol. 27, no. 8, Dec. 2016, pp. 791–811, doi:10.1177/0887403414562604.</Typography>
                 <Box sx={{paddingTop:'2%'}}></Box>
 

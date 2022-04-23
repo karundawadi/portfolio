@@ -15,7 +15,7 @@ function ProblemsWithPlastic(props) {
         <Box style={{
         }}>
             <Helmet>
-              <title>{props.title}</title>
+              <title>Problems with Plastic</title>
               <script src="https://giscus.app/client.js"
                   data-repo="karundawadi/portfolio-comments"
                   data-repo-id="R_kgDOHODkgA"
