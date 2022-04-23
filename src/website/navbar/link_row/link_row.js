@@ -47,7 +47,7 @@ function LinkRow(params) {
                 fontSize: 'x-large'
             }} 
             onClick={()=>{
-                window.open(resumeLocation)
+                window.open("Resume.pdf")
             }}/>
         </Box>
     )

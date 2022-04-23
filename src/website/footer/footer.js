@@ -9,7 +9,9 @@ function Footer(){
                 paddingTop:2,
                 alignText:'center'
             }}>
-                <Typography align="center">@Karun Dawadi</Typography>
+                <Typography align="center" onClick={()=>{
+                    window.open("/")
+                }}>@Karun Dawadi</Typography>
                 <LinkRow/>
             </Box>
         </Container>
