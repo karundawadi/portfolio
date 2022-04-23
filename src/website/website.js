@@ -1,6 +1,6 @@
 import React from "react"
 import {
-  BrowserRouter,
+  HashRouter as Router,
   Routes,
   Route,
 } from "react-router-dom";
@@ -19,7 +19,7 @@ function WebSite() {
     const [value, setValue] = React.useState(0);
 
     return (
-        <BrowserRouter>
+        <Router>
             <ThemeProvider theme={
                 createTheme({
                     palette: {
@@ -37,7 +37,7 @@ function WebSite() {
                     <Route path="article/canSpam" element={<CanSpam changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
-        </BrowserRouter>
+        </Router>
     )
 }
 
