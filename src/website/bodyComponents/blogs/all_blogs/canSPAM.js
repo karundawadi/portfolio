@@ -16,18 +16,18 @@ function CanSpam(props) {
             <Helmet>
               <title>CAN Spam Act 2003</title>
               <script src="https://giscus.app/client.js"
-                  data-repo="karundawadi/portfolio-comments"
-                  data-repo-id="R_kgDOHODkgA"
-                  data-category="Q&A"
-                  data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="pathname"
-                  data-reactions-enabled="1"
-                  data-emit-metadata="0"
-                  data-input-position="bottom"
-                  data-theme={props.dark?"dark":"light_protanopia"}
-                  data-lang="en"
-                  crossorigin="anonymous"
-                  async>
+                data-repo="karundawadi/portfolio-comments"
+                data-repo-id="R_kgDOHODkgA"
+                data-category="General"
+                data-category-id="DIC_kwDOHODkgM4COudw"
+                data-mapping="title"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme={props.dark?"dark":"light_protanopia"}
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
               </script>
             </Helmet>
             <Container maxWidth="md">
