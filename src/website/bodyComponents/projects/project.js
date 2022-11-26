@@ -40,7 +40,7 @@ function Project(){
                             shortDescription={"Mobile application designed to make managing money easier."}
                             actualDescription={"SaveCash is an open source mobile application designed to make managing money easier.It does all this within your device allowing you to worry less about privacy and focus more on your finances."}
                             gitHubLink = {'https://github.com/karundawadi/SaveCash'}
-                            imageLink = {"https://raw.githubusercontent.com/karundawadi/SaveCash/main/assets/adaptive-icon.png"}
+                            imageLink = {require('../projects/projects_list/SaveCash/savecash.png')}
                             imagealt = {'Landing Page'}
                         />
                         
@@ -51,17 +51,17 @@ function Project(){
                         shortDescription={"A web application that recommends movies."}
                         actualDescription={"What to watch tonight is a movie recommendation system that uses collaborative filtering algorithms to suggest movies to users."}
                         gitHubLink = {'https://github.com/karundawadi/WTWT'}
-                        imageLink = {"https://www.site-shot.com/cached_image/SrsagsKdEeyvIgJCrBEABA"}
+                        imageLink = {require('../projects/projects_list/WTWT/WTWT.png')}
                         imagealt = {'WTWT live demo'}
                     />
                     
                     <TemplateCard 
                         LanguagesUsed={"Python"} 
                         projectTitle={'Robotic Arm'}
-                        shortDescription={"A Lego robot capable of drwaring complex shapes."}
+                        shortDescription={"A Lego robot capable of drawing complex shapes."}
                         actualDescription={"Robotic Arm utilized inverse kinematics to estimate the points required to draw a shape. Then, it used the motors to draw the actual shape."}
                         gitHubLink = {'https://github.com/karundawadi/roboticArm'}
-                        imageLink = {"https://raw.githubusercontent.com/karundawadi/roboticArm/main/pictures/robot.jpg"}
+                        imageLink = {require('../projects/projects_list/RoboticArm/roboticarm.jpg')}
                         imagealt = {'WTWT live demo'}
                     />
                 </Box>

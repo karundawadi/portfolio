@@ -20,15 +20,15 @@ function Skills(){
                         <Box>
                             <dl class="row">
                                 <dt class="col-sm-3">Programming Langugaes</dt>
-                                <dd class="col-sm-9">Python, JavaScript ES5/ES6, C, TypeScript, Swift, SQL, C++, Java, Regex</dd>
+                                <dd class="col-sm-9">Python, TypeScript, Swift, JavaScript ES5/ES6, C, SQL, C++, Java, Regex</dd>
 
                                 <dt class="col-sm-3">FrameWorks and Libraries</dt>
                                 <dd class="col-sm-9">
-                                    <p>React Native, React, Redux, Axios, Expo, Flask, Django, Pandas, Numpy, Bootstrap</p>
+                                    <p>React Native, SwiftUI, UIKit, React, Redux, Axios, Expo, Flask, Django, Pandas, Numpy, Bootstrap</p>
                                 </dd>
 
                                 <dt class="col-sm-3">Web Technologies</dt>
-                                <dd class="col-sm-9">HTML5, CSS, XML, JSON, REST, Github Pages, WordPress, CPanel, Google Analytics</dd>
+                                <dd class="col-sm-9">AWS, HTML5, CSS, XML, JSON, REST, Github Pages, WordPress, CPanel, Google Analytics</dd>
 
                                 <dt class="col-sm-3 text-truncate">Database</dt>
                                 <dd class="col-sm-9">MySQL, SQL/NoSQL , Firebase</dd>
