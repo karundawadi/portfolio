@@ -1,7 +1,7 @@
-import { Box, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 import React from "react"
-import { Navbar, Nav, NavDropdown } from "react-bootstrap"
-import {RiSunFill, RiSunLine} from "react-icons/ri";
+import { Navbar, Nav } from "react-bootstrap"
+import { RiSunFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 function ProjectRow(props) {

@@ -1,5 +1,5 @@
 import React from "react"
-import {Typography, Box, Container, useTheme, Card, CardActions, CardContent, CardMedia, Button } from "@mui/material" 
+import { Typography, Box, Container, useTheme } from "@mui/material" 
 import TemplateCard from "./Template/template_card"
 
 function boxStylesCuston(theme){

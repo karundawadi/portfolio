@@ -1,5 +1,5 @@
 import React from "react"
-import {Typography, Box, Container, useTheme, Grid } from "@mui/material"
+import {Typography, Box, Container, Grid } from "@mui/material"
 import {Image} from 'react-bootstrap'
 
 const professional_image = require('../../../assets/images/professional_image.jpg')

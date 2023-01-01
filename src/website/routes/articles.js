@@ -1,14 +1,12 @@
 import React from 'react'
-import { Container, Box, Typography, Paper } from "@mui/material"
+import { Container, Box, Typography } from "@mui/material"
 import ProjectRow from "../navbar/project row/project_row"
 import Footer from "../footer/footer"
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@emotion/react';
 import { TableRow, TableContainer, TableCell, Table } from '@mui/material';
 
 function Articles(props) {
-    const theme = useTheme()
     const navigate = useNavigate()
     return (
         <Box style={{
