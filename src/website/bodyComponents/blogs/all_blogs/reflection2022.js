@@ -46,7 +46,7 @@ function Reflection2022(props) {
                 <ProjectRow dark={props.dark} changeMode={props.changeMode}/>
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
-                        <Typography variant="h5">A Memorable Year of Adventure, Loss, and New Beginnings</Typography>
+                        <Typography variant="h5">A memorable year of adventure, loss, and new beginnings</Typography>
                         <Typography variant="subtitle2">Published on <span onClick={()=>{
                             navigate("/article")
                         }}>December 31, 2022</span></Typography>
