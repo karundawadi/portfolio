@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Container, CardMedia, Card, Modal, CardContent, Typography, CardActions, Button, useTheme  } from "@mui/material"
+import { Box, CardMedia, Card, CardContent, Typography, CardActions, Button, useTheme  } from "@mui/material"
 const style = {
     position: 'absolute',
     top: '50%',
