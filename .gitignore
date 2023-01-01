@@ -23,3 +23,6 @@ yarn-error.log*
 .DS_Store
 
 build/
+.idea/vcs.xml
+.idea/modules.xml
+.idea/portfolio.iml

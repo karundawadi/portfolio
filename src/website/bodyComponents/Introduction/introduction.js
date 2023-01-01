@@ -29,15 +29,26 @@ function Introduciton(){
                     <Box sx={{
                     }}>
                         <Typography variant="body1">
-                            Hello, world!
+                            Hey there!
                         </Typography>
                         {breakPara()}
                         <Typography variant="body1">
-                            {`I am Karun Dawadi and I am currently working as a Software Engineer. I graduated with a bachelor's degree in Computer Science from the University of Texas at Arlington in May 2022. I have been in the tech industry for ${year_months()}.`} 
+                            {`My name is Karun Dawadi and I'm a software engineer who loves nothing more than diving 
+                            into code and creating cool new projects. I recently graduated from the University of Texas at Arlington 
+                            with a bachelor's degree in Computer Science and have been working in the tech industry for the past ${year_months()} months.
+                            I've always been fascinated by software development and the endless possibilities it offers. 
+                            That's why I've dedicated myself to learning as much as I can about the field and using my 
+                            skills to create projects that push the boundaries of what's possible.`}
                         </Typography>
                         {breakPara()}
                         <Typography variant="body1">
-                            My interest in software development has led me to work on a few projects, which can be found in the project section above. In addition, I write articles about technology and various other topics, which can be found in the articles section.
+                            In my spare time, I also enjoy sharing my knowledge and insights through writing articles 
+                            about technology and other topics. I hope you'll check out some of my work in the sections 
+                            above and see for yourself the exciting things I'm working on.
+                        </Typography>
+                        {breakPara()}
+                        <Typography variant="body1">
+                            Thanks for stopping by!
                         </Typography>
                     </Box>
                 </Grid>

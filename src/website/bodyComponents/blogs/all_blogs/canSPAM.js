@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image'
 import { useTheme } from '@emotion/react';
 
 function CanSpam(props) {
-  const breakPara = ()=>{return <Box sx={{paddingTop:'4%'}}/>}
+  const breakPara = (customPadding="2.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
   const theme = useTheme()
   const navigate = useNavigate()
     return (
@@ -21,7 +21,7 @@ function CanSpam(props) {
                   data-repo-id="R_kgDOHODkgA"
                   data-category="Q&A"
                   data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="pathname"
+                  data-mapping="url"
                   data-reactions-enabled="1"
                   data-emit-metadata="0"
                   data-input-position="bottom"
@@ -44,7 +44,7 @@ function CanSpam(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">CAN Spam Act of 2003</Typography>
-                        <Typography variant="subtitle">Article by <span onClick={()=>{
+                        <Typography variant="subtitle2">Article by <span onClick={()=>{
                         navigate("/")
                         }}>Karun Dawadi</span>, Published on <span onClick={()=>{
                         navigate("/article")
@@ -111,7 +111,7 @@ function CanSpam(props) {
                 <Box sx={{paddingTop:'2%'}}></Box>
 
                 <Typography variant="body2">"Opt out." Merriam-Webster.com. Merriam-Webster, n.d. Web. 19 Nov. 2018.
-Hu, Bill, et al. “The CAN-SPAM Act of 2003 and Stock Spam Emails.” Financial Services Review, vol. 18, no. 1, Spring 2009, pp. 87–104. EBSCOhost, doi: academyfinancial.org/Abstracts.</Typography>
+                    Hu, Bill, et al. “The CAN-SPAM Act of 2003 and Stock Spam Emails.” Financial Services Review, vol. 18, no. 1, Spring 2009, pp. 87–104. EBSCOhost, doi: academyfinancial.org/Abstracts.</Typography>
                 <Box sx={{paddingTop:'2%'}}></Box>
 
                 <Typography variant="body2">“15 U.S. Code § 7703 - Prohibition against Predatory and Abusive Commercial e-Mail.” LII / Legal Information Institute, Legal Information Institute, www.law.cornell.edu/uscode/text/15/7703.</Typography>

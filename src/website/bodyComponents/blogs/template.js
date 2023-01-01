@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image'
 import { useTheme } from '@emotion/react';
 
 function TimeBasedMaintanence(props) {
-  const breakPara = ()=>{return <Box sx={{paddingTop:'4%'}}/>}
+    const breakPara = (customPadding="1.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
   const theme = useTheme()
   const navigate = useNavigate()
     return (
@@ -21,7 +21,7 @@ function TimeBasedMaintanence(props) {
                   data-repo-id="R_kgDOHODkgA"
                   data-category="Q&A"
                   data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="pathname"
+                  data-mapping="url"
                   data-reactions-enabled="1"
                   data-emit-metadata="0"
                   data-input-position="bottom"
@@ -44,7 +44,7 @@ function TimeBasedMaintanence(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">Time Based Maintanence</Typography>
-                        <Typography variant="subtitle">Article by <span onClick={()=>{
+                        <Typography variant="subtitle2">Article by <span onClick={()=>{
                         navigate("/")
                         }}>Karun Dawadi</span>, Published on <span onClick={()=>{
                         navigate("/article")

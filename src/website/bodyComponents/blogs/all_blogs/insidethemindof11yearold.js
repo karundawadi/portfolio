@@ -8,7 +8,7 @@ import Image from 'react-bootstrap/Image';
 import { useTheme } from '@emotion/react';
 
 function InsideOutReview(props) {
-  const breakPara = ()=>{return <Box sx={{paddingTop:'4%'}}/>}
+    const breakPara = (customPadding="1.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
   const theme = useTheme()
   const navigate = useNavigate()
     return (
@@ -21,7 +21,7 @@ function InsideOutReview(props) {
                   data-repo-id="R_kgDOHODkgA"
                   data-category="Q&A"
                   data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="pathname"
+                  data-mapping="url"
                   data-reactions-enabled="1"
                   data-emit-metadata="0"
                   data-input-position="bottom"
@@ -45,7 +45,7 @@ function InsideOutReview(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">What is inside the mind of a 11-year old ?</Typography>
-                        <Typography variant="subtitle">Article by <span onClick={()=>{
+                        <Typography variant="subtitle2">Article by <span onClick={()=>{
                         navigate("/")
                         }}>Karun Dawadi</span>, Published on <span onClick={()=>{
                         navigate("/article")
