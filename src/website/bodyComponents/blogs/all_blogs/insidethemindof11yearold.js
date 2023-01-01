@@ -4,7 +4,6 @@ import Footer from "../../../footer/footer";
 import ProjectRow from '../../../navbar/project row/project_row';
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@emotion/react';
 
 function InsideOutReview(props) {
     const breakPara = (customPadding="2.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
