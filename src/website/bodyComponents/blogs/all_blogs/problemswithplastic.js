@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 
 function ProblemsWithPlastic(props) {
-    const breakPara = (customPadding="2.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
-  const theme = useTheme()
+  const breakPara = (customPadding="2.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
   const navigate = useNavigate()
     return (
         <Box style={{

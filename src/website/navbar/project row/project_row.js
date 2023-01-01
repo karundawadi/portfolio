@@ -3,11 +3,9 @@ import React from "react"
 import { Navbar, Nav, NavDropdown } from "react-bootstrap"
 import {RiSunFill, RiSunLine} from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { useTheme } from "@emotion/react";
 
 function ProjectRow(props) {
     const dark_light =  props.dark ? "dark" : "light"
-    const theme = useTheme()
     return (
         <Navbar bg={dark_light} variant={dark_light} sticky="top">
             <div className="btn-group mx-auto">

@@ -8,7 +8,6 @@ import { useTheme } from '@emotion/react';
 
 function CanSpam(props) {
   const breakPara = (customPadding="2.5%")=>{return <Box sx={{paddingTop:`${customPadding}`}}/>}
-  const theme = useTheme()
   const navigate = useNavigate()
     return (
         <Box style={{

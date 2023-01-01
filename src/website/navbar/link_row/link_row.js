@@ -3,7 +3,6 @@ import { Box} from "@mui/material"
 import { BsGithub, BsLinkedin, BsEnvelope, BsFileEarmarkText } from 'react-icons/bs'
 
 function LinkRow(params) {
-    const resumeLocation = "../../assets/Resume.pdf"
     return (
         <Box sx={{ 
                 flexDirection: 'row',

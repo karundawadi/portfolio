@@ -1,17 +1,5 @@
 import React from "react"
 import { Box, CardMedia, Card, CardContent, Typography, CardActions, Button, useTheme  } from "@mui/material"
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: "auto",
-    minWidth:300,
-    bgcolor: 'background.paper',
-    border: '0.5px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
 
 function TemplateCard(props){
     const theme = useTheme()

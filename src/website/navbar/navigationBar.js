@@ -2,10 +2,8 @@ import React from "react"
 import { Container,Box, Typography, Grid } from "@mui/material"
 import ProjectRow from "./project row/project_row"
 import LinkRow from "./link_row/link_row"
-import {RiSunFill, RiSunLine} from "react-icons/ri";
-import { useTheme } from "@emotion/react";
+
 function NavigationBar(props) {
-    const theme = useTheme()
     return (
         <Container>
             <Box component="span" sx={{ 

@@ -20,8 +20,6 @@ import Reflection2022 from "./bodyComponents/blogs/all_blogs/reflection2022";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    const [value, setValue] = React.useState(0);
-
     return (
         <HashRouter>
             <ThemeProvider theme={

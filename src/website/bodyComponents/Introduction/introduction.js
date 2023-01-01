@@ -5,13 +5,12 @@ import {Image} from 'react-bootstrap'
 const professional_image = require('../../../assets/images/professional_image.jpg')
 
 function Introduciton(){
-    const theme = useTheme()
     const breakPara = ()=>{return <Box sx={{paddingTop:'2%'}}/>}
     const year_months = ()=> {
         var months = Math.floor((Date.now() - new Date("2022-07-05")) / (1000*60*60*24*30));
         var years = Math.floor(months/ 12);
         months = months - years * 12;
-        return years == 0 ? `${months} months` : `${years} years and ${months} months`;
+        return years === 0 ? `${months} months` : `${years} years and ${months} months`;
     }
     return (
         <Container style={{
