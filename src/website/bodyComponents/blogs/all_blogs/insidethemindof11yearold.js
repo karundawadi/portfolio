@@ -42,9 +42,7 @@ function InsideOutReview(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">What is inside the mind of a 11-year old ?</Typography>
-                        <Typography variant="subtitle2">Article by <span onClick={()=>{
-                        navigate("/")
-                        }}>Karun Dawadi</span>, Published on <span onClick={()=>{
+                        <Typography variant="subtitle2">Published on <span onClick={()=>{
                         navigate("/article")
                         }}>January 21, 2019</span></Typography>
                     </Box>

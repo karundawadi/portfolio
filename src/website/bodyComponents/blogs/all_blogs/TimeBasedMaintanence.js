@@ -43,9 +43,7 @@ function TimeBasedMaintanence(props) {
                 }}>
                   <Box>
                     <Typography variant="h5">Time Based Maintanence</Typography>
-                    <Typography variant="subtitle2">Article by <span onClick={()=>{
-                      navigate("/")
-                    }}>Karun Dawadi</span>, Published on <span onClick={()=>{
+                    <Typography variant="subtitle2">Published on <span onClick={()=>{
                       navigate("/article")
                     }}>April 22, 2022</span></Typography>
                   </Box>

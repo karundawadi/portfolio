@@ -41,9 +41,7 @@ function ProblemsWithPlastic(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">Problems with plastic and how to solve them</Typography>
-                        <Typography variant="subtitle2">Article by <span onClick={()=>{
-                        navigate("/")
-                        }}>Karun Dawadi</span>, Published on <span onClick={()=>{
+                        <Typography variant="subtitle2">Published on <span onClick={()=>{
                         navigate("/article")
                         }}>January 19, 2019</span></Typography>
                     </Box>

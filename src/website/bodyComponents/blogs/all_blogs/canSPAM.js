@@ -41,9 +41,7 @@ function CanSpam(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">CAN Spam Act of 2003</Typography>
-                        <Typography variant="subtitle2">Article by <span onClick={()=>{
-                        navigate("/")
-                        }}>Karun Dawadi</span>, Published on <span onClick={()=>{
+                        <Typography variant="subtitle2">Published on <span onClick={()=>{
                         navigate("/article")
                         }}>Feburary 20</span></Typography>
                     </Box>

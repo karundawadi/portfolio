@@ -47,10 +47,8 @@ function Reflection2022(props) {
                 <Box sx={{paddingTop:'2%'}}>
                     <Box>
                         <Typography variant="h5">A Memorable Year of Adventure, Loss, and New Beginnings</Typography>
-                        <Typography variant="subtitle2">Article by <span onClick={()=>{
-                        navigate("/")
-                        }}>Karun Dawadi</span>, Published on <span onClick={()=>{
-                        navigate("/article")
+                        <Typography variant="subtitle2">Published on <span onClick={()=>{
+                            navigate("/article")
                         }}>December 31, 2022</span></Typography>
                     </Box>
                 </Box>
