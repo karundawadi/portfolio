@@ -61,15 +61,6 @@ function Articles(props) {
                         <TableRow 
                             hover 
                             onClick={()=>{
-                                navigate("insideOut")
-                            }}
-                        >
-                            <TableCell align="left">What is inside the mind of a 11-year old?</TableCell>
-                            <TableCell align="right">January 21</TableCell>
-                        </TableRow>
-                        <TableRow 
-                            hover 
-                            onClick={()=>{
                                 navigate("problemsWithPlastic")
                             }}
                         >

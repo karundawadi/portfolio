@@ -13,7 +13,6 @@ import {
     createTheme 
 } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
-import InsideOutReview from "./bodyComponents/blogs/all_blogs/insidethemindof11yearold";
 import ProblemsWithPlastic from "./bodyComponents/blogs/all_blogs/problemswithplastic";
 import CanSpam from "./bodyComponents/blogs/all_blogs/canSPAM";
 import Reflection2022 from "./bodyComponents/blogs/all_blogs/reflection2022";
@@ -34,7 +33,6 @@ function WebSite() {
                     <Route path="article" element={<Articles changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="project" element={<Projects changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/timeBasedMaintanence" element={<TimeBasedMaintanence changeMode={changeDarkMode} dark={darkMode}/>} />
-                    <Route path="article/insideOut" element={<InsideOutReview changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/problemsWithPlastic" element={<ProblemsWithPlastic changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/canSpam" element={<CanSpam changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/reflection2022" element={<Reflection2022 changeMode={changeDarkMode} dark={darkMode}/>} />

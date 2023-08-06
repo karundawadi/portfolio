@@ -10,7 +10,14 @@ function Introduciton(){
         var months = Math.floor((Date.now() - new Date("2022-07-05")) / (1000*60*60*24*30));
         var years = Math.floor(months/ 12);
         months = months - years * 12;
-        return years === 0 ? `${months} months` : `${years} years and ${months} months`;
+        let end_string = ''
+        if (years !== 0) {
+            end_string += years === 1 ? `${years} year` : `${years} years`
+        }
+        if (months !== 0) {
+            end_string += months === 1 ? ` and ${months} month` : ` and ${months} months`
+        }
+       return end_string;
     }
     return (
         <Container style={{
@@ -34,7 +41,7 @@ function Introduciton(){
                         <Typography variant="body1">
                             {`My name is Karun Dawadi and I'm a software engineer who loves nothing more than diving 
                             into code and creating cool new projects. I recently graduated from the University of Texas at Arlington 
-                            with a bachelor's degree in Computer Science and have been working in the tech industry for the past ${year_months()} months.
+                            with a bachelor's degree in Computer Science and have been working in the tech industry for the past ${year_months()}.
                             I've always been fascinated by software development and the endless possibilities it offers. 
                             That's why I've dedicated myself to learning as much as I can about the field and using my 
                             skills to create projects that push the boundaries of what's possible.`}
