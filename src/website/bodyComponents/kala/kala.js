@@ -19,31 +19,40 @@ function Skills(){
                     <AccordionDetails>
                         <Box>
                             <dl class="row">
-                                <dt class="col-sm-3">Programming Langugaes</dt>
-                                <dd class="col-sm-9">Python, TypeScript, Swift, JavaScript ES5/ES6, C, SQL, C++, Java, Regex</dd>
+                                <dt class="col-sm-3">Programming languages</dt>
+                                <dd class="col-sm-9">Typescript, Swift, JavaScript ES5/ES6, Objective C, Python, Java, C, C++, Regex</dd>
 
-                                <dt class="col-sm-3">FrameWorks and Libraries</dt>
+                                <dt class="col-sm-3">Amazon Web Services Technologies</dt>
                                 <dd class="col-sm-9">
-                                    <p>React Native, SwiftUI, UIKit, React, Redux, Axios, Expo, Flask, Django, Pandas, Numpy, Bootstrap</p>
+                                    <p>Cloud-formation, Cloud-Watch, Lambda, S3, API Gateway, Cloud-Front</p>
                                 </dd>
 
-                                <dt class="col-sm-3">Web Technologies</dt>
-                                <dd class="col-sm-9">AWS, HTML5, CSS, XML, JSON, REST, Github Pages, WordPress, CPanel, Google Analytics</dd>
+                                <dt class="col-sm-3">Back-end development</dt>
+                                <dd class="col-sm-9">AWS CDK, Back-end for Front-end, Server-less, Django, Flask</dd>
+
+                                <dt class="col-sm-3 text-truncate">Mobile development</dt>
+                                <dd class="col-sm-9">iOS development (Swift, Objective C), RxSwift, React Native, Expo, Flutter</dd>
+
+                                <dt class="col-sm-3 text-truncate">Web development</dt>
+                                <dd class="col-sm-9">HTML, CSS, React, Redux, Axios, Bootstrap, Github pages, WordPress, CPanel, Google Analytics</dd>
+
+                                <dt class="col-sm-3 text-truncate">APIs</dt>
+                                <dd class="col-sm-9">RESTful APIs, GraphQL</dd>
 
                                 <dt class="col-sm-3 text-truncate">Database</dt>
-                                <dd class="col-sm-9">MySQL, SQL/NoSQL , Firebase</dd>
+                                <dd class="col-sm-9">MySQL, SQL/NoSQL, Firebase</dd>
 
-                                <dt class="col-sm-3 text-truncate">Tools/ Repository</dt>
-                                <dd class="col-sm-9">GIT, Service-Now, Maven, CocoaPods</dd>
+                                <dt class="col-sm-3 text-truncate">Testing</dt>
+                                <dd class="col-sm-9">Jest, XCUITest, Selenium, A/B Testing, Smoke and Sanity testing</dd>
 
-                                <dt class="col-sm-3 text-truncate">Developer Tools</dt>
-                                <dd class="col-sm-9">XCode, Android Studio, VS Code, IntelliJ, Eclipse</dd>
-
-                                <dt class="col-sm-3 text-truncate">Operating Systems</dt>
-                                <dd class="col-sm-9">macOS, Windows, iOS, Android, Unix, Linux</dd>
+                                <dt class="col-sm-3 text-truncate">Build Tools/ Repository</dt>
+                                <dd class="col-sm-9">GIT, Maven, Gradle, CocoaPods, Github, Bitbucket, Gitlab</dd>
 
                                 <dt class="col-sm-3 text-truncate">Methodologies</dt>
-                                <dd class="col-sm-9">Agile, Waterfall, Test Driven Development (TDD)</dd>
+                                <dd class="col-sm-9">Agile, Waterfall, Test Driven Development (TDD), Rapid Application Development (RAD)</dd>
+
+                                <dt class="col-sm-3 text-truncate">Developer Tools</dt>
+                                <dd class="col-sm-9">IntelliJ, Postman, XCode, Android Studio, VS Code, Eclipse, Nano, VIM, Jira, Service-Now</dd>
 
                             </dl>
                         </Box>
