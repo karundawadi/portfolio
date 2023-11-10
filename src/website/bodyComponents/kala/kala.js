@@ -20,7 +20,7 @@ function Skills(){
                         <Box>
                             <dl class="row">
                                 <dt class="col-sm-3">Programming languages</dt>
-                                <dd class="col-sm-9">Typescript, Swift, JavaScript ES5/ES6, Objective C, Python, Java, C, C++, Regex</dd>
+                                <dd class="col-sm-9">Typescript, Swift, Java, Objective C, Python, C, C++, C\#, Regex</dd>
 
                                 <dt class="col-sm-3">Amazon Web Services Technologies</dt>
                                 <dd class="col-sm-9">
@@ -31,28 +31,28 @@ function Skills(){
                                 <dd class="col-sm-9">AWS CDK, Back-end for Front-end, Server-less, Django, Flask</dd>
 
                                 <dt class="col-sm-3 text-truncate">Mobile development</dt>
-                                <dd class="col-sm-9">iOS development (Swift, Objective C), RxSwift, React Native, Expo, Flutter</dd>
+                                <dd class="col-sm-9">: iOS (Swift, Objective C, RxSwift), React Native, Expo</dd>
 
                                 <dt class="col-sm-3 text-truncate">Web development</dt>
-                                <dd class="col-sm-9">HTML, CSS, React, Redux, Axios, Bootstrap, Github pages, WordPress, CPanel, Google Analytics</dd>
+                                <dd class="col-sm-9">: React, Angular, Redux, Axios, Bootstrap, HTML, CSS</dd>
 
                                 <dt class="col-sm-3 text-truncate">APIs</dt>
-                                <dd class="col-sm-9">RESTful APIs, GraphQL</dd>
+                                <dd class="col-sm-9">RESTful APIs, GraphQL, Web Sockets</dd>
 
                                 <dt class="col-sm-3 text-truncate">Database</dt>
-                                <dd class="col-sm-9">MySQL, SQL/NoSQL, Firebase</dd>
+                                <dd class="col-sm-9">MySQL, MongoDB, PostgressSQL</dd>
 
                                 <dt class="col-sm-3 text-truncate">Testing</dt>
-                                <dd class="col-sm-9">Jest, XCUITest, Selenium, A/B Testing, Smoke and Sanity testing</dd>
+                                <dd class="col-sm-9">Jest, XUnit, XCUITest, Selenium, Unit testing, A/B Testing, Smoke and Sanity testing</dd>
 
                                 <dt class="col-sm-3 text-truncate">Build Tools/ Repository</dt>
                                 <dd class="col-sm-9">GIT, Maven, Gradle, CocoaPods, Github, Bitbucket, Gitlab</dd>
 
                                 <dt class="col-sm-3 text-truncate">Methodologies</dt>
-                                <dd class="col-sm-9">Agile, Waterfall, Test Driven Development (TDD), Rapid Application Development (RAD)</dd>
+                                <dd class="col-sm-9">Agile, TDD, RAD, BDD</dd>
 
                                 <dt class="col-sm-3 text-truncate">Developer Tools</dt>
-                                <dd class="col-sm-9">IntelliJ, Postman, XCode, Android Studio, VS Code, Eclipse, Nano, VIM, Jira, Service-Now</dd>
+                                <dd class="col-sm-9">IntelliJ, Postman, XCode, Android Studio, VS Code, Eclipse, Jira, Service-Now</dd>
 
                             </dl>
                         </Box>
