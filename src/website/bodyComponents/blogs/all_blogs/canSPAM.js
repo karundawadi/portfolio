@@ -13,20 +13,6 @@ function CanSpam(props) {
         }}>
             <Helmet>
               <title>{props.title}</title>
-              <script src="https://giscus.app/client.js"
-                  data-repo="karundawadi/portfolio-comments"
-                  data-repo-id="R_kgDOHODkgA"
-                  data-category="Q&A"
-                  data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="url"
-                  data-reactions-enabled="1"
-                  data-emit-metadata="0"
-                  data-input-position="bottom"
-                  data-theme={props.dark?"dark":"light_protanopia"}
-                  data-lang="en"
-                  crossorigin="anonymous"
-                  async>
-              </script>
             </Helmet>
             <Container maxWidth="md">
                 <Typography 
@@ -123,7 +109,6 @@ function CanSpam(props) {
 
                 <Typography variant="body2"> Pry, Carl G. “Faxes and E-Mail: Don’t Forget the Opt Outs!” ABA Bank Marketing, vol. 41, no. 1, Jan. 2009, p. 56. EBSCOhost, search.ebscohost.com/login.aspx?direct=true&db=bft&AN=510748526&site=ehost-live.</Typography>
 
-                <div className='giscus'></div>
                 <Footer/>
             </Container>
         </Box>

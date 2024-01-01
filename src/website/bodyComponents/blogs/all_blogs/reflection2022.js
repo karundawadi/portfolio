@@ -14,20 +14,6 @@ function Reflection2022(props) {
         }}>
             <Helmet>
               <title>Reflection 2022</title>
-              <script src="https://giscus.app/client.js"
-                  data-repo="karundawadi/portfolio-comments"
-                  data-repo-id="R_kgDOHODkgA"
-                  data-category="Q&A"
-                  data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="url"
-                  data-reactions-enabled="1"
-                  data-emit-metadata="0"
-                  data-input-position="bottom"
-                  data-theme={props.dark?"dark":"light_protanopia"}
-                  data-lang="en"
-                  crossorigin="anonymous"
-                  async>
-              </script>
 
               {/* All privacy related materials  */}
               <meta name="robots" content="noindex,nofollow"/>
@@ -150,7 +136,6 @@ function Reflection2022(props) {
                         </Typography>
                         {breakPara()}
                     </Box>
-                <div className='giscus'></div>
                 <Footer/>
             </Container>
         </Box>

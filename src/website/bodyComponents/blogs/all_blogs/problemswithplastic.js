@@ -13,20 +13,6 @@ function ProblemsWithPlastic(props) {
         }}>
             <Helmet>
               <title>{props.title}</title>
-              <script src="https://giscus.app/client.js"
-                  data-repo="karundawadi/portfolio-comments"
-                  data-repo-id="R_kgDOHODkgA"
-                  data-category="Q&A"
-                  data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="url"
-                  data-reactions-enabled="1"
-                  data-emit-metadata="0"
-                  data-input-position="bottom"
-                  data-theme={props.dark?"dark":"light_protanopia"}
-                  data-lang="en"
-                  crossorigin="anonymous"
-                  async>
-              </script>
             </Helmet>
             <Container maxWidth="md">
                 <Typography 
@@ -105,7 +91,6 @@ function ProblemsWithPlastic(props) {
 
                 <Typography variant="body2">Stephens, Rachael, and Leighton | Walter Kille. “Plastics, Human Health and Environmental Impacts: The Road Ahead.” Journalist's Resource, Journalist's Resource, 9 Oct. 2014, journalistsresource.org/studies/environment/pollution-environment/plastics-environmental-health-literature-review.</Typography>
                 
-                <div className='giscus'></div>
 
                 <Footer/>
             </Container>

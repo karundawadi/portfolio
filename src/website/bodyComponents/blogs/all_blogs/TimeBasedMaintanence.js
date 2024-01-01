@@ -13,20 +13,6 @@ function TimeBasedMaintanence(props) {
         }}>
             <Helmet>
               <title>Time Based Maintanence</title>
-              <script src="https://giscus.app/client.js"
-                  data-repo="karundawadi/portfolio-comments"
-                  data-repo-id="R_kgDOHODkgA"
-                  data-category="Q&A"
-                  data-category-id="DIC_kwDOHODkgM4COudx"
-                  data-mapping="url"
-                  data-reactions-enabled="1"
-                  data-emit-metadata="0"
-                  data-input-position="bottom"
-                  data-theme={props.dark?"dark":"light_protanopia"}
-                  data-lang="en"
-                  crossorigin="anonymous"
-                  async>
-              </script>
             </Helmet>
             <Container maxWidth="md">
                 <Typography 
@@ -73,7 +59,6 @@ function TimeBasedMaintanence(props) {
                   </Typography>
 
                 </Box>
-                <Box className='giscus'></Box>
                 <Footer/>
             </Container>
         </Box>

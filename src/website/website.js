@@ -16,6 +16,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import ProblemsWithPlastic from "./bodyComponents/blogs/all_blogs/problemswithplastic";
 import CanSpam from "./bodyComponents/blogs/all_blogs/canSPAM";
 import Reflection2022 from "./bodyComponents/blogs/all_blogs/reflection2022";
+import Reflection2023 from "./bodyComponents/blogs/all_blogs/reflection2023";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -36,6 +37,7 @@ function WebSite() {
                     <Route path="article/problemsWithPlastic" element={<ProblemsWithPlastic changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/canSpam" element={<CanSpam changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/reflection2022" element={<Reflection2022 changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="article/reflection2023" element={<Reflection2023 changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
         </HashRouter>
