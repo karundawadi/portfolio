@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Button,
   TextField,
@@ -17,15 +17,16 @@ import {
   DialogContent,
   DialogActions,
   Checkbox,
-} from '@mui/material';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import DeleteIcon from '@mui/icons-material/Delete';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useMediaQuery } from '@mui/material';
+} from "@mui/material";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useMediaQuery } from "@mui/material";
+import TaskModal from "./taskModal";
 
 function TimeManager() {
   const [tasks, setTasks] = useState([]);
-  const [taskName, setTaskName] = useState('');
+  const [taskName, setTaskName] = useState("");
   const [estimate, setEstimate] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(null);
@@ -35,7 +36,7 @@ function TimeManager() {
 
   // Load tasks from local storage on component mount
   useEffect(() => {
-    const savedTasks = localStorage.getItem('tasks');
+    const savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
       setTasks(JSON.parse(savedTasks));
     }
@@ -43,7 +44,7 @@ function TimeManager() {
 
   // Save tasks to local storage whenever the tasks state changes
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   const handleTaskNameChange = (e) => {
@@ -55,8 +56,8 @@ function TimeManager() {
   };
 
   const addTask = () => {
-    if (taskName.trim() === '' || isNaN(estimate) || estimate <= 0) {
-      alert('Invalid task or estimate');
+    if (taskName.trim() === "" || isNaN(estimate) || estimate <= 0) {
+      alert("Invalid task or estimate");
       return;
     }
 
@@ -66,7 +67,7 @@ function TimeManager() {
     };
 
     setTasks([...tasks, newTask]);
-    setTaskName('');
+    setTaskName("");
     setEstimate(0);
   };
 
@@ -100,7 +101,7 @@ function TimeManager() {
   const markAsComplete = (index) => {
     const completedTask = tasks[index];
     setCompletedTasks([...completedTasks, completedTask]);
-    removeTask(index);
+    toggleCompleted(index);
   };
 
   const startPomodoro = () => {
@@ -109,7 +110,7 @@ function TimeManager() {
     const selectedTask = tasks[selectedTaskIndex];
 
     if (selectedTask.estimate <= 0) {
-      alert('Task completed!');
+      alert("Task completed!");
       closeModal();
       return;
     }
@@ -133,29 +134,33 @@ function TimeManager() {
   };
 
   const clearAllTasks = () => {
-    localStorage.removeItem('tasks');
+    localStorage.removeItem("tasks");
     setTasks([]);
     setDeleteDialogOpen(false);
   };
 
   const toggleCompleted = (index) => {
     const updatedCompletedTasks = [...completedTasks];
-    const taskToToggle = completedTasks[index];
-    updatedCompletedTasks.splice(index, 1);
+    const taskToToggle = tasks[index];
 
-    if (!tasks.includes(taskToToggle)) {
-      setTasks([...tasks, taskToToggle]);
+    if (completedTasks.includes(taskToToggle)) {
+      // If the task is already in completedTasks, remove it
+      const taskIndex = completedTasks.indexOf(taskToToggle);
+      updatedCompletedTasks.splice(taskIndex, 1);
+    } else {
+      // Otherwise, add it to completedTasks
+      updatedCompletedTasks.push(taskToToggle);
     }
 
     setCompletedTasks(updatedCompletedTasks);
   };
 
-  // Determine system's color scheme preference
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const themeMode = prefersDarkMode ? 'dark' : 'light';
+  // Determine the system's color scheme preference
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const themeMode = prefersDarkMode ? "dark" : "light";
 
   return (
-    <Container maxWidth="sm" style={{ marginTop: '2rem', textAlign: 'center' }}>
+    <Container maxWidth="sm" style={{ marginTop: "2rem", textAlign: "center" }}>
       <CssBaseline />
       <div>
         <TextField
@@ -177,7 +182,12 @@ function TimeManager() {
           margin="normal"
           autoComplete="off"
         />
-        <Button variant="contained" color="primary" onClick={addTask} style={{ marginTop: '1rem' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={addTask}
+          style={{ marginTop: "1rem" }}
+        >
           Add Task
         </Button>
       </div>
@@ -189,24 +199,31 @@ function TimeManager() {
               {...provided.droppableProps}
               ref={provided.innerRef}
               elevation={3}
-              style={{ padding: '1rem', marginTop: '2rem' }}
+              style={{ padding: "1rem", marginTop: "2rem" }}
             >
               <List>
                 {tasks.map((task, index) => (
-                  <Draggable key={index} draggableId={`task-${index}`} index={index}>
+                  <Draggable
+                    key={index}
+                    draggableId={`task-${index}`}
+                    index={index}
+                  >
                     {(provided) => (
                       <ListItem
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        onClick={() => openModal(index)}
                         divider
                       >
                         <Checkbox
                           checked={completedTasks.includes(task)}
-                          onChange={() => toggleCompleted(index)}
+                          onChange={() => markAsComplete(index)} // Mark task as complete on checkbox change
                         />
-                        <ListItemText primary={task ? task.name : ''} secondary={task ? `Est. ${task.estimate}` : ''} />
+                        <ListItemText
+                          onClick={() => openModal(index)}
+                          primary={task ? task.name : ""}
+                          secondary={task ? `Est. ${task.estimate}` : ""}
+                        />
                         <IconButton
                           edge="end"
                           aria-label="delete"
@@ -232,7 +249,7 @@ function TimeManager() {
         color="error"
         aria-label="delete all tasks"
         onClick={openDeleteDialog}
-        style={{ marginTop: '1rem' }}
+        style={{ marginTop: "1rem" }}
       >
         <DeleteForeverIcon fontSize="large" />
       </IconButton>
@@ -241,7 +258,8 @@ function TimeManager() {
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
-            Are you sure you want to delete all tasks? This action cannot be undone.
+            Are you sure you want to delete all tasks? This action cannot be
+            undone.
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -253,21 +271,13 @@ function TimeManager() {
           </Button>
         </DialogActions>
       </Dialog>
-
-      <Modal open={modalOpen} onClose={closeModal}>
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
-          <Typography variant="h5">Pomodoro Timer</Typography>
-          <Typography variant="body1">Task: {(tasks[selectedTaskIndex] || {}).name || ''}</Typography>
-          <Typography variant="body1">Estimate: {(tasks[selectedTaskIndex] || {}).estimate || ''}</Typography>
-          <Typography variant="body1">Pomodoros Completed: {pomodoros}</Typography>
-          <Button variant="contained" color="primary" onClick={startPomodoro} style={{ marginTop: '1rem' }}>
-            Start Pomodoro
-          </Button>
-          <Button variant="contained" color="secondary" onClick={closeModal} style={{ marginTop: '1rem' }}>
-            Close
-          </Button>
-        </Box>
-      </Modal>
+      <TaskModal
+        isOpen={modalOpen}
+        closeModal={closeModal}
+        task={tasks[selectedTaskIndex] || {}}
+        pomodoros={pomodoros}
+        startPomodoro={startPomodoro}
+      />
     </Container>
   );
 }
