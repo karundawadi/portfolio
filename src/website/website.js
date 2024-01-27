@@ -17,6 +17,7 @@ import ProblemsWithPlastic from "./bodyComponents/blogs/all_blogs/problemswithpl
 import CanSpam from "./bodyComponents/blogs/all_blogs/canSPAM";
 import Reflection2022 from "./bodyComponents/blogs/all_blogs/reflection2022";
 import Reflection2023 from "./bodyComponents/blogs/all_blogs/reflection2023";
+import TimeManager from "../projects/timeManager/timeManager";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -38,6 +39,7 @@ function WebSite() {
                     <Route path="article/canSpam" element={<CanSpam changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/reflection2022" element={<Reflection2022 changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article/reflection2023" element={<Reflection2023 changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="timeManager" element={<TimeManager changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
         </HashRouter>
