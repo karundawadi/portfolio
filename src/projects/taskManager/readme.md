@@ -1,5 +1,7 @@
 # Task Manager
 
+***Note: This is not created to replace your task manager. This just incorporates pomodoro and other things that many task managers do not do.***
+
 Live at: https://karundawadi.com/#/taskManager
 
 This web application is a task management tool designed to optimize a workday. Users can enter tasks along with an estimated number of Pomodoro cycles needed to complete each one. These tasks are then stored in a queue, with all data saved in the browser's local storage. Also, keep in mind that one can reorder tasks and arrange them how they want. This information is synced to the local storage. For mobile users, they may need to hold and drag to be able to rearrange a task.
