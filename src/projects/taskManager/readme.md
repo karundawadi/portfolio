@@ -8,7 +8,7 @@ This web application is a task management tool designed to optimize a workday. U
 
 Tasks are visually categorized by their Pomodoro cycle estimates: tasks requiring more than 10 cycles are colored in shades of red, those needing fewer than 5 cycles are in shades of blue, and tasks needing fewer than 2 cycles appear in shades of green. Users have the flexibility to reorder tasks based on priority.
 
-Clicking on a task opens a modal that allows users to start a Pomodoro timer. Each completed Pomodoro cycle increments the 'worked' count for that task.
+Clicking on a task opens a modal that allows users to start a Pomodoro timer. Each completed Pomodoro cycle increments the 'worked' count for that task. The modal also has a local storage instance which keeps track of the task and the relevant note inside it. 
 
 The application includes a graphical feature that tracks the estimated versus actual Pomodoro cycles (Y-axis) against the date each task was entered (X-axis). This historical data helps users make more accurate estimates over time.
 
