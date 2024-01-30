@@ -4,15 +4,20 @@
 
 Live at: https://karundawadi.com/#/taskManager
 
-This web application is a task management tool designed to optimize a workday. Users can enter tasks along with an estimated number of Pomodoro cycles needed to complete each one. These tasks are then stored in a queue, with all data saved in the browser's local storage. Also, keep in mind that one can reorder tasks and arrange them how they want. This information is synced to the local storage. For mobile users, they may need to hold and drag to be able to rearrange a task.
 
-Tasks are visually categorized by their Pomodoro cycle estimates: tasks requiring more than 10 cycles are colored in shades of red, those needing fewer than 5 cycles are in shades of blue, and tasks needing fewer than 2 cycles appear in shades of green. Users have the flexibility to reorder tasks based on priority.
+This web application serves as an effective task management tool, specifically tailored to enhance productivity throughout a workday. It allows users to input tasks and associate them with an estimated number of Pomodoro cycles required for completion. These tasks are organized in a queue and all relevant data is securely stored in the browser's local storage. Moreover, the application supports task reordering, enabling users to prioritize as per their needs, with changes immediately updated in the local storage. On mobile devices, users can rearrange tasks with a simple hold-and-drag action.
 
-Clicking on a task opens a modal that allows users to start a Pomodoro timer. Each completed Pomodoro cycle increments the 'worked' count for that task. The modal also has a local storage instance which keeps track of the task and the relevant note inside it. 
+The tasks are color-coded based on the estimated Pomodoro cycles: tasks requiring more than 10 cycles are displayed in shades of red, those needing fewer than 5 cycles in shades of blue, and tasks with less than 2 cycles in shades of green. This color-coding allows for easy categorization and prioritization of tasks.
 
-The application includes a graphical feature that tracks the estimated versus actual Pomodoro cycles (Y-axis) against the date each task was entered (X-axis). This historical data helps users make more accurate estimates over time.
+Clicking on a task triggers a modal window where users can initiate a Pomodoro timer. Each Pomodoro cycle completed is automatically added to the task's 'worked' count. The modal also includes a feature to store notes specific to each task, with the data preserved in the local storage.
 
-Additionally, the UI features a master delete button, enabling users to clear all tasks and effectively clean the local storage. This function serves as a reset mechanism for the application.
+An integral feature of the application is its graphical tracking system, which compares the estimated Pomodoro cycles against the actual cycles on the Y-axis, plotted against the date of task entry on the X-axis. This historical tracking aids in making more accurate future estimates.
+
+For enhanced data management, users have the option to export and import tasks, providing a backup option and flexibility in managing local storage data.
+
+The application also streamlines task entry; simply pressing enter after typing a task adds it to the queue.
+
+Additionally, the user interface includes a master delete button. This feature allows users to erase all tasks from the queue and clear the local storage, serving as a convenient reset mechanism for the entire application.
 
 ## Is this effective ?
 
@@ -31,5 +36,12 @@ Here are some strategies to increase productivity and effectivness:
 
 Please feel free to open any bugs that you find on issues for this repository. 
 
+### Changelog 
+#### 01/30/2024
+- Fixed case in which if a pomodoro is started on a task it updates all other tasks 
+- Pressing enter alows one to input a task to the queue 
+- Huge improvement in timer and how pomodoro is counted. Now, it is counted after a pomodoro ends. 
+- Edit funtionality introduced 
+
 ### Updated 
-01/27/2024
+01/30/2024

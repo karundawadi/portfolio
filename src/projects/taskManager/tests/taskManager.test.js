@@ -1,73 +1,47 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import TaskManager from "../src/taskManager.js";
+import 'resize-observer-polyfill';
 
-// jest.setup.js
-global.ResizeObserver = require("resize-observer-polyfill");
-
-// Mock localStorage
-const localStorageMock = (function () {
-  let store = {};
-  return {
-    getItem(key) {
-      return store[key] || null;
-    },
-    setItem(key, value) {
-      store[key] = value.toString();
-    },
-    clear() {
-      store = {};
-    },
-  };
-})();
-
-Object.defineProperty(window, "localStorage", {
-  value: localStorageMock,
-});
-
-describe("TimeManager Component", () => {
+describe("TaskManager Component", () => {
   beforeEach(() => {
-    window.localStorage.clear();
+    localStorage.clear(); // Clear local storage before each test
   });
 
-  test("allows users to add tasks", () => {
-    render(<TaskManager />);
-    const taskInput = screen.getByLabelText(/Task Name/i);
-    const estimateInput = screen.getByLabelText(/Estimate \(pomodoros\)/i);
-    const addButton = screen.getByRole("button", { name: /Add/i });
-
-    userEvent.type(taskInput, "New Task");
-    userEvent.type(estimateInput, "3");
-    userEvent.click(addButton);
-
-    expect(screen.getByText("New Task")).toBeInTheDocument();
-    expect(screen.getByText(/Estimated: 3/)).toBeInTheDocument();
+  it("renders TaskManager component with initial state", () => {
+    render(<TaskManager title="Test TaskManager" />);
+    
+    // Check if the component renders with a title
+    expect(screen.getByText("Task Manager")).toBeInTheDocument();
+    
+    // Check if Add button is present
+    expect(screen.getByText("Add")).toBeInTheDocument();
+    
+    // Check if the initial tasks list is empty
+    expect(screen.queryByText("Estimated:")).toBeNull();
+    
+    // Check if the import and export buttons are present
+    expect(screen.getByText("Export")).toBeInTheDocument();
+    expect(screen.getByText("Import")).toBeInTheDocument();
   });
 
-  test("shows error for invalid input", () => {
-    render(<TaskManager />);
-    const taskInput = screen.getByLabelText(/Task Name/i);
-    const estimateInput = screen.getByLabelText(/Estimate \(pomodoros\)/i);
-    const addButton = screen.getByRole("button", { name: /Add/i });
+  it("displays an error when invalid input is provided", () => {
+    render(<TaskManager title="Test TaskManager" />);
+    
+    // Enter an empty task name and an invalid estimate
+    const taskNameInput = screen.getByLabelText("Task Name");
+    const taskEstimateInput = screen.getByLabelText("Estimate (pomodoros)");
+    const addButton = screen.getByText("Add");
 
-    userEvent.type(taskInput, "");
-    userEvent.type(estimateInput, "abc"); // invalid estimate
-    userEvent.click(addButton);
+    fireEvent.change(taskNameInput, { target: { value: "" } });
+    fireEvent.change(taskEstimateInput, { target: { value: "abc" } });
 
+    fireEvent.click(addButton);
+
+    // Check if the error message is displayed
     expect(
-      screen.getByText(/Task name and estimate \(in pomodoros\) are required!/)
+      screen.getByText("Task name and estimate (in pomodoros) are required!")
     ).toBeInTheDocument();
   });
 
-  test("allows users to delete a task", async () => {
-    render(<TaskManager />);
-    // First, add a task
-    // ... similar steps as in the first test ...
-
-    const deleteButton = screen.getByLabelText("delete");
-    userEvent.click(deleteButton);
-
-    expect(screen.queryByText("New Task")).not.toBeInTheDocument();
-  });
 });

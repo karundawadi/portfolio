@@ -9,7 +9,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Modal from "@mui/material/Modal";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -44,12 +47,17 @@ function TaskManager(props) {
   const [error, setError] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [showDialog, setDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editableTask, setEditableTask] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  const handleAddTask = () => {
+  const handleAddTask = (event) => {
+    // To allow enter to add a task
+    event.preventDefault();
+
     if (!taskName.trim() || !taskEstimate.trim() || isNaN(taskEstimate)) {
       setError(true);
       return;
@@ -106,6 +114,45 @@ function TaskManager(props) {
     });
     setTasks(newTasks);
   };
+
+  const handleOpenEditDialog = (task, index) => {
+    setEditableTask({ ...task, index });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleSaveEditedTask = () => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === editableTask.index ? { ...editableTask } : task
+    );
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setIsEditDialogOpen(false);
+  };
+
+  const handleExportTasks = () => {
+    const tasksData = JSON.stringify(tasks);
+    const blob = new Blob([tasksData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "tasks.json";
+    link.click();
+  };
+
+  const handleImportTasks = (event) => {
+    const fileReader = new FileReader();
+    fileReader.readAsText(event.target.files[0], "UTF-8");
+    fileReader.onload = e => {
+      const importedTasks = JSON.parse(e.target.result);
+      if (Array.isArray(importedTasks)) {
+        setTasks(importedTasks);
+        localStorage.setItem("tasks", e.target.result);
+      } else {
+        alert("Invalid file format");
+      }
+    };
+  };
+  
 
   const handleOpenModal = (task) => {
     setSelectedTask(task);
@@ -178,38 +225,67 @@ function TaskManager(props) {
           margin="auto"
         >
           <Typography variant="h4">Task Manager</Typography>
-          <Box display="flex" flexDirection="column" justifyContent="center">
-            <TextField
-              label="Task Name"
-              value={taskName}
-              onChange={(e) => setTaskName(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              autoComplete="off"
-            />
-            <TextField
-              label="Estimate (pomodoros)"
-              type="number"
-              value={taskEstimate}
-              onChange={(e) => setTaskEstimate(e.target.value)}
-              variant="outlined"
-              margin="normal"
-              autoComplete="off"
-            />
-            <Box
-              alignContent={"center"}
-              justifyContent={"center"}
-              margin={"auto"}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleAddTask}
-              >
-                Add
+          <input
+            type="file"
+            id="fileInput"
+            style={{ display: 'none' }}
+            onChange={handleImportTasks}
+          />
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+              <Button onClick={handleExportTasks} startIcon={<CloudDownloadIcon />}>
+                Export
               </Button>
-            </Box>
+              <input
+                type="file"
+                id="fileInput"
+                style={{ display: 'none' }}
+                onChange={handleImportTasks}
+              />
+              <Button onClick={() => document.getElementById('fileInput').click()} startIcon={<CloudUploadIcon />}>
+                Import
+              </Button>
           </Box>
+          <form onSubmit={handleAddTask}>
+            <Box display="flex" flexDirection="column" justifyContent="center">
+              <TextField
+                label="Task Name"
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                autoComplete="off"
+              />
+              <TextField
+                label="Estimate (pomodoros)"
+                type="number"
+                value={taskEstimate}
+                onChange={(e) => setTaskEstimate(e.target.value)}
+                variant="outlined"
+                margin="normal"
+                autoComplete="off"
+              />
+              <Box
+                alignContent={"center"}
+                justifyContent={"center"}
+                margin={"auto"}
+              >
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={handleAddTask}
+                >
+                  Add
+                </Button>
+              </Box>
+            </Box>
+          </form>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="tasks">
               {(provided) => (
@@ -244,6 +320,13 @@ function TaskManager(props) {
                             secondary={`Estimated: ${task.estimate}, Worked: ${task.pomodoroWorked}`}
                             onClick={() => handleOpenModal(task)}
                           />
+                          <IconButton
+                            edge="end"
+                            aria-label="edit"
+                            onClick={() => handleOpenEditDialog(task, index)}
+                          >
+                            <EditIcon />
+                          </IconButton>
                           <IconButton
                             edge="end"
                             aria-label="delete"
@@ -333,6 +416,39 @@ function TaskManager(props) {
               </Button>
               <Button onClick={() => handleDeleteAllTasks()} color="primary">
                 Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog
+            open={isEditDialogOpen}
+            onClose={() => setIsEditDialogOpen(false)}
+          >
+            <DialogTitle>Edit Task</DialogTitle>
+            <DialogContent>
+              <TextField
+                label="Task Name"
+                value={editableTask?.name || ""}
+                onChange={(e) =>
+                  setEditableTask({ ...editableTask, name: e.target.value })
+                }
+                margin="normal"
+                fullWidth
+              />
+              <TextField
+                label="Estimate (pomodoros)"
+                type="number"
+                value={editableTask?.estimate || ""}
+                onChange={(e) =>
+                  setEditableTask({ ...editableTask, estimate: e.target.value })
+                }
+                margin="normal"
+                fullWidth
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setIsEditDialogOpen(false)}>Cancel</Button>
+              <Button onClick={handleSaveEditedTask} color="primary">
+                Save
               </Button>
             </DialogActions>
           </Dialog>

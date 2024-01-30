@@ -42,27 +42,30 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
 
   useEffect(() => {
     let interval = null;
-
+  
     if (isActive && seconds > 0) {
       interval = setInterval(() => {
         setSeconds((secs) => secs - 1);
       }, 1000);
-    } else if (seconds === 0) {
-      alertSound.play();
-    }
-
-    return () => {
+    } else if (!isActive || seconds === 0) {
       clearInterval(interval);
-    };
-  }, [isActive, seconds, alertSound]);
+      if (seconds === 0) {
+        alertSound.play();
+        if (mode === "work" || mode === "pomodoro") {
+          const updatedTask = {
+            ...selectedTask,
+            pomodoroWorked: selectedTask.pomodoroWorked + 1,
+          };
+          updateTask(updatedTask);
+        }
+        // Handle mode switching here
+      }
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds, mode, selectedTask, updateTask, alertSound]);
 
   const toggle = () => {
     setIsActive(!isActive);
-    if (!isActive && (mode === "work" || mode === "pomodoro")) {
-      selectedTask.pomodoroWorked += 1;
-      setPomodoroCount(pomodoroCount + 1);
-      updateTask(selectedTask);
-    }
   };
 
   const reset = useCallback((mode = "work") => {
