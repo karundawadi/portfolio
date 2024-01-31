@@ -36,6 +36,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Helmet } from "react-helmet";
+import { v4 as uuidv4 } from 'uuid';
+
 
 function TaskManager(props) {
   const [taskName, setTaskName] = useState("");
@@ -68,11 +70,12 @@ function TaskManager(props) {
       setTasks([
         ...tasks,
         {
-          name: taskName,
-          estimate: taskEstimate,
-          pomodoroWorked: 0,
-          completed: false,
-          date: today.toISOString().slice(0, 10),
+            id: uuidv4(), // Assign a unique ID
+            name: taskName,
+            estimate: taskEstimate,
+            pomodoroWorked: 0,
+            completed: false,
+            date: today.toISOString().slice(0, 10),
         },
       ]);
       setTaskName("");
@@ -93,12 +96,21 @@ function TaskManager(props) {
   };
 
   const updateTask = (updatedTask) => {
-    const updatedTasks = tasks.map(
-      (task) => (task.id === updatedTask.id ? updatedTask : task) // Assuming each task has a unique 'id'
-    );
-    setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks)); // Save to local storage
+      const updatedTasks = tasks.map(task => {
+          if (task.id === updatedTask.id) {
+              return updatedTask;
+          }
+          return task;
+      });
+      setTasks(updatedTasks);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+
+      // Update selectedTask if it's the one being updated
+      if (selectedTask && selectedTask.id === updatedTask.id) {
+          setSelectedTask(updatedTask);
+      }
   };
+
 
   const handleDeleteAllTasks = () => {
     setTasks([]);
@@ -382,6 +394,7 @@ function TaskManager(props) {
             {/* Wrapping as div for testing */}
             <div>
               <PomodoroBox
+                key={selectedTask?.id}
                 selectedTask={selectedTask}
                 updateTask={updateTask}
               />

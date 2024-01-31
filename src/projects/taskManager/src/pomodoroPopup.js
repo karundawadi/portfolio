@@ -58,7 +58,7 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
           };
           updateTask(updatedTask);
         }
-        // Handle mode switching here
+        switchMode(`short break`);
       }
     }
     return () => clearInterval(interval);
