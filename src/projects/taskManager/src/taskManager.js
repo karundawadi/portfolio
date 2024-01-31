@@ -39,6 +39,7 @@ import { Helmet } from "react-helmet";
 import { v4 as uuidv4 } from "uuid";
 
 function TaskManager(props) {
+  const VERSION_NUMBER = "1.0.3";
   const [taskName, setTaskName] = useState("");
   const [taskEstimate, setTaskEstimate] = useState("");
   const [tasks, setTasks] = useState(
@@ -234,6 +235,7 @@ function TaskManager(props) {
           margin="auto"
         >
           <Typography variant="h4">Task Manager</Typography>
+          <Typography variant="subtitle2">v{VERSION_NUMBER}</Typography>
           <input
             type="file"
             id="fileInput"
