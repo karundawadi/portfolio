@@ -9,10 +9,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Modal from "@mui/material/Modal";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -36,8 +36,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Helmet } from "react-helmet";
-import { v4 as uuidv4 } from 'uuid';
-
+import { v4 as uuidv4 } from "uuid";
 
 function TaskManager(props) {
   const [taskName, setTaskName] = useState("");
@@ -70,12 +69,12 @@ function TaskManager(props) {
       setTasks([
         ...tasks,
         {
-            id: uuidv4(), // Assign a unique ID
-            name: taskName,
-            estimate: taskEstimate,
-            pomodoroWorked: 0,
-            completed: false,
-            date: today.toISOString().slice(0, 10),
+          id: uuidv4(), // Assign a unique ID
+          name: taskName,
+          estimate: taskEstimate,
+          pomodoroWorked: 0,
+          completed: false,
+          date: today.toISOString().slice(0, 10),
         },
       ]);
       setTaskName("");
@@ -96,21 +95,20 @@ function TaskManager(props) {
   };
 
   const updateTask = (updatedTask) => {
-      const updatedTasks = tasks.map(task => {
-          if (task.id === updatedTask.id) {
-              return updatedTask;
-          }
-          return task;
-      });
-      setTasks(updatedTasks);
-      localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-      // Update selectedTask if it's the one being updated
-      if (selectedTask && selectedTask.id === updatedTask.id) {
-          setSelectedTask(updatedTask);
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
       }
-  };
+      return task;
+    });
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
 
+    // Update selectedTask if it's the one being updated
+    if (selectedTask && selectedTask.id === updatedTask.id) {
+      setSelectedTask(updatedTask);
+    }
+  };
 
   const handleDeleteAllTasks = () => {
     setTasks([]);
@@ -154,7 +152,7 @@ function TaskManager(props) {
   const handleImportTasks = (event) => {
     const fileReader = new FileReader();
     fileReader.readAsText(event.target.files[0], "UTF-8");
-    fileReader.onload = e => {
+    fileReader.onload = (e) => {
       const importedTasks = JSON.parse(e.target.result);
       if (Array.isArray(importedTasks)) {
         setTasks(importedTasks);
@@ -164,7 +162,6 @@ function TaskManager(props) {
       }
     };
   };
-  
 
   const handleOpenModal = (task) => {
     setSelectedTask(task);
@@ -240,28 +237,34 @@ function TaskManager(props) {
           <input
             type="file"
             id="fileInput"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             onChange={handleImportTasks}
           />
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-              <Button onClick={handleExportTasks} startIcon={<CloudDownloadIcon />}>
-                Export
-              </Button>
-              <input
-                type="file"
-                id="fileInput"
-                style={{ display: 'none' }}
-                onChange={handleImportTasks}
-              />
-              <Button onClick={() => document.getElementById('fileInput').click()} startIcon={<CloudUploadIcon />}>
-                Import
-              </Button>
+            <Button
+              onClick={handleExportTasks}
+              startIcon={<CloudDownloadIcon />}
+            >
+              Export
+            </Button>
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              onChange={handleImportTasks}
+            />
+            <Button
+              onClick={() => document.getElementById("fileInput").click()}
+              startIcon={<CloudUploadIcon />}
+            >
+              Import
+            </Button>
           </Box>
           <form onSubmit={handleAddTask}>
             <Box display="flex" flexDirection="column" justifyContent="center">

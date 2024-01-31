@@ -42,7 +42,7 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
 
   useEffect(() => {
     let interval = null;
-  
+
     if (isActive && seconds > 0) {
       interval = setInterval(() => {
         setSeconds((secs) => secs - 1);
@@ -109,20 +109,20 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
   return (
     <Box
       sx={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        maxWidth: { xs: '90%', sm: '80%', md: 600 },
-        maxHeight: '90%',
-        width: '100%',
-        bgcolor: 'background.paper',
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        maxWidth: { xs: "90%", sm: "80%", md: 600 },
+        maxHeight: "90%",
+        width: "100%",
+        bgcolor: "background.paper",
         boxShadow: 24,
         p: { xs: 2, sm: 3, md: 4 },
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        overflowY: 'auto', 
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        overflowY: "auto",
       }}
     >
       <Typography variant="h5" component="h2" textAlign={"center"}>
