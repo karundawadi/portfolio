@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import {
   Box,
   Typography,
@@ -15,6 +15,7 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
   const [mode, setMode] = useState("work"); // Modes: 'work', 'short break', 'long break', 'pomodoro'
   const [pomodoroCount, setPomodoroCount] = useState(0);
   const [taskNotes, setTaskNotes] = useState("");
+  const worker = useRef(); // Web worker
 
   const alertSound = useMemo(
     () =>
@@ -41,6 +42,24 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
   }, [taskNotes, selectedTask]);
 
   useEffect(() => {
+    worker.current = new Worker(`${process.env.PUBLIC_URL}/timerWorker.js`);
+
+    worker.current.onmessage = (e) => {
+      if (e.data.type === "tick") {
+        setSeconds(Math.ceil(e.data.remainingTime / 1000));
+      } else if (e.data.type === "finished") {
+        // handle the end of the timer
+        endPomodoroSession();
+      }
+    };
+
+    // Cleanup
+    return () => {
+      worker.current.terminate();
+    };
+  }, []);
+
+  useEffect(() => {
     let interval = null;
 
     if (isActive && seconds > 0) {
@@ -64,20 +83,67 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
     return () => clearInterval(interval);
   }, [isActive, seconds, mode, selectedTask, updateTask, alertSound]);
 
-  const toggle = () => {
-    setIsActive(!isActive);
+  const endPomodoroSession = () => {
+    // Play the alert sound
+    alertSound.play();
+
+    // Update the task with an additional completed Pomodoro, if applicable
+    if (mode === "work" || mode === "pomodoro") {
+      const updatedTask = {
+        ...selectedTask,
+        pomodoroWorked: selectedTask.pomodoroWorked + 1,
+      };
+      updateTask(updatedTask);
+    }
+
+    // Determine the next mode based on the current mode and number of Pomodoros completed
+    let nextMode;
+    if (mode === "work" || mode === "pomodoro") {
+      if (pomodoroCount % 4 === 3) {
+        // Typically after every 4 pomodoros, a longer break is taken
+        nextMode = "long break";
+      } else {
+        nextMode = "short break";
+      }
+      setPomodoroCount(pomodoroCount + 1);
+    } else {
+      // If currently in a break, switch back to work mode
+      nextMode = "work";
+    }
+
+    // Switch to the next mode
+    switchMode(nextMode);
+
+    // Reset the timer for the next session
+    reset(nextMode);
   };
 
-  const reset = useCallback((mode = "work") => {
-    const durations = {
-      work: 1500,
-      "short break": 300,
-      "long break": 900,
-      pomodoro: 1500,
-    };
-    setSeconds(durations[mode]);
-    setIsActive(false);
-  }, []);
+  const toggle = () => {
+    setIsActive(!isActive);
+    if (worker.current) {
+      const command = isActive ? "stop" : "start";
+      const duration = !isActive ? seconds * 1000 : undefined; // Convert seconds to milliseconds only if starting
+      worker.current.postMessage({ command, duration });
+    }
+  };
+
+  const reset = useCallback(
+    (mode = "work") => {
+      const durations = {
+        work: 1500, // 25 minutes
+        "short break": 300, // 5 minutes
+        "long break": 900, // 15 minutes
+        pomodoro: 1500, // 25 minutes (same as work for simplicity)
+      };
+      setSeconds(durations[mode]);
+      setIsActive(false);
+      // If the worker is active, send a stop command
+      if (worker.current) {
+        worker.current.postMessage({ command: "stop" });
+      }
+    },
+    [worker]
+  );
 
   const switchMode = useCallback(
     (newMode) => {
