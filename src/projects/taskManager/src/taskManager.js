@@ -70,12 +70,13 @@ function TaskManager(props) {
       setTasks([
         ...tasks,
         {
-          id: uuidv4(), // Assign a unique ID
+          id: uuidv4(),
           name: taskName,
           estimate: taskEstimate,
           pomodoroWorked: 0,
           completed: false,
           date: today.toISOString().slice(0, 10),
+          completionDate: null,
         },
       ]);
       setTaskName("");
@@ -119,9 +120,15 @@ function TaskManager(props) {
   const handleCompleteTask = (index) => {
     const newTasks = tasks.map((task, i) => {
       if (i === index) {
-        return { ...task, completed: !task.completed };
+        return {
+          ...task,
+          completed: !task.completed,
+          completionDate: !task.completed
+            ? new Date().toISOString().slice(0, 10)
+            : task.completionDate,
+        };
       }
-      return task; // Corrected this line
+      return task;
     });
     setTasks(newTasks);
   };
@@ -192,22 +199,30 @@ function TaskManager(props) {
 
   const aggregateDataByDate = (tasks) => {
     const data = {};
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7); // Calculate date for 7 days ago
 
     tasks.forEach((task) => {
-      if (data[task.date]) {
-        data[task.date].Estimated += parseInt(task.estimate, 10);
-        data[task.date].Worked += task.pomodoroWorked;
-      } else {
-        data[task.date] = {
-          Estimated: parseInt(task.estimate, 10),
-          Worked: task.pomodoroWorked,
-        };
+      const taskDate = new Date(task.date);
+      if (taskDate >= sevenDaysAgo) {
+        // Only include tasks from the last 7 days
+        if (data[task.date]) {
+          data[task.date].Estimated += parseInt(task.estimate, 10);
+          data[task.date].Worked += task.pomodoroWorked;
+        } else {
+          data[task.date] = {
+            Estimated: parseInt(task.estimate, 10),
+            Worked: task.pomodoroWorked,
+          };
+        }
       }
     });
-    return Object.keys(data).map((date) => ({
-      date,
-      ...data[date],
-    }));
+    return Object.keys(data)
+      .map((date) => ({
+        date,
+        ...data[date],
+      }))
+      .sort((a, b) => new Date(a.date) - new Date(b.date)); // Ensure data is sorted by date
   };
 
   const graphData = aggregateDataByDate(tasks);
@@ -307,54 +322,67 @@ function TaskManager(props) {
             <Droppable droppableId="tasks">
               {(provided) => (
                 <List {...provided.droppableProps} ref={provided.innerRef}>
-                  {tasks.map((task, index) => (
-                    <Draggable
-                      key={index}
-                      draggableId={String(index)}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <ListItem
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={{
-                            ...provided.draggableProps.style,
-                            textDecoration: task.completed
-                              ? "line-through"
-                              : "none",
-                            backgroundColor: getBackgroundColor(task.estimate),
-                            borderRadius: 6,
-                            margin: 8,
-                          }}
-                        >
-                          <Checkbox
-                            checked={task.completed}
-                            onChange={() => handleCompleteTask(index)}
-                          />
-                          <ListItemText
-                            primary={task.name}
-                            secondary={`Estimated: ${task.estimate}, Worked: ${task.pomodoroWorked}`}
-                            onClick={() => handleOpenModal(task)}
-                          />
-                          <IconButton
-                            edge="end"
-                            aria-label="edit"
-                            onClick={() => handleOpenEditDialog(task, index)}
+                  {tasks
+                    .filter((task) => {
+                      if (!task.completed) return true; // Show all uncompleted tasks
+                      const completionDate = new Date(task.completionDate);
+                      const currentDate = new Date();
+                      const differenceInTime =
+                        currentDate.getTime() - completionDate.getTime();
+                      const differenceInDays =
+                        differenceInTime / (1000 * 3600 * 24);
+                      return differenceInDays <= 1; // Only show completed tasks if they were completed within the last day
+                    })
+                    .map((task, index) => (
+                      <Draggable
+                        key={index}
+                        draggableId={String(index)}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <ListItem
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              ...provided.draggableProps.style,
+                              textDecoration: task.completed
+                                ? "line-through"
+                                : "none",
+                              backgroundColor: getBackgroundColor(
+                                task.estimate
+                              ),
+                              borderRadius: 6,
+                              margin: 8,
+                            }}
                           >
-                            <EditIcon />
-                          </IconButton>
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => handleDeleteTask(index)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </ListItem>
-                      )}
-                    </Draggable>
-                  ))}
+                            <Checkbox
+                              checked={task.completed}
+                              onChange={() => handleCompleteTask(index)}
+                            />
+                            <ListItemText
+                              primary={task.name}
+                              secondary={`Estimated: ${task.estimate}, Worked: ${task.pomodoroWorked}`}
+                              onClick={() => handleOpenModal(task)}
+                            />
+                            <IconButton
+                              edge="end"
+                              aria-label="edit"
+                              onClick={() => handleOpenEditDialog(task, index)}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={() => handleDeleteTask(index)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </ListItem>
+                        )}
+                      </Draggable>
+                    ))}
                   {provided.placeholder}
                 </List>
               )}
