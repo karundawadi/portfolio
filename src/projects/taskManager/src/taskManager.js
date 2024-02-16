@@ -39,7 +39,7 @@ import { Helmet } from "react-helmet";
 import { v4 as uuidv4 } from "uuid";
 
 function TaskManager(props) {
-  const VERSION_NUMBER = "1.0.5";
+  const VERSION_NUMBER = "1.0.6";
   const [taskName, setTaskName] = useState("");
   const [taskEstimate, setTaskEstimate] = useState("");
   const [tasks, setTasks] = useState(
