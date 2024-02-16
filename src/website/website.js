@@ -7,17 +7,14 @@ import {
 import About from "./routes/about"
 import Articles from "./routes/articles"
 import Projects from "./routes/projects"
-import TimeBasedMaintanence from "./bodyComponents/blogs/all_blogs/TimeBasedMaintanence";
 import { 
     ThemeProvider, 
     createTheme 
 } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
-import ProblemsWithPlastic from "./bodyComponents/blogs/all_blogs/problemswithplastic";
-import CanSpam from "./bodyComponents/blogs/all_blogs/canSPAM";
-import Reflection2022 from "./bodyComponents/blogs/all_blogs/reflection2022";
-import Reflection2023 from "./bodyComponents/blogs/all_blogs/reflection2023";
 import TaskManager from "../projects/taskManager/src/taskManager";
+import BlogRenderer from "./bodyComponents/blogs/BlogRenderer";
+import { AllBlogs } from "./bodyComponents/blogs/AllBlogs";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -34,11 +31,11 @@ function WebSite() {
                     <Route path="/" element={<About changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="article" element={<Articles changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="project" element={<Projects changeMode={changeDarkMode} dark={darkMode}/>} />
-                    <Route path="article/timeBasedMaintanence" element={<TimeBasedMaintanence changeMode={changeDarkMode} dark={darkMode}/>} />
-                    <Route path="article/problemsWithPlastic" element={<ProblemsWithPlastic changeMode={changeDarkMode} dark={darkMode}/>} />
-                    <Route path="article/canSpam" element={<CanSpam changeMode={changeDarkMode} dark={darkMode}/>} />
-                    <Route path="article/reflection2022" element={<Reflection2022 changeMode={changeDarkMode} dark={darkMode}/>} />
-                    <Route path="article/reflection2023" element={<Reflection2023 changeMode={changeDarkMode} dark={darkMode}/>} />
+                    {AllBlogs.map(article => (
+                        <Route key={article.path} 
+                            path={`article/${article.path}`} 
+                            element={<BlogRenderer articleData={article.data} changeMode={changeDarkMode} dark={darkMode}/>} />
+                    ))}
                     <Route path="taskManager" element={<TaskManager title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
