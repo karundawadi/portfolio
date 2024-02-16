@@ -67,6 +67,8 @@ function TaskManager(props) {
 
     if (taskName && taskEstimate && !isNaN(taskEstimate)) {
       const today = new Date();
+      const offset = today.getTimezoneOffset() * 60000; // Offset in milliseconds
+      const localISOTime = (new Date(today - offset)).toISOString().slice(0, 10);
       setTasks([
         ...tasks,
         {
@@ -75,7 +77,7 @@ function TaskManager(props) {
           estimate: taskEstimate,
           pomodoroWorked: 0,
           completed: false,
-          date: today.toISOString().slice(0, 10),
+          date: localISOTime,
           completionDate: null,
         },
       ]);
@@ -120,12 +122,14 @@ function TaskManager(props) {
   const handleCompleteTask = (index) => {
     const newTasks = tasks.map((task, i) => {
       if (i === index) {
+        const today = new Date();
+        const offset = today.getTimezoneOffset() * 60000; // Offset in milliseconds
+        const localISOTime = (new Date(today - offset)).toISOString().slice(0, 10);
+  
         return {
           ...task,
           completed: !task.completed,
-          completionDate: !task.completed
-            ? new Date().toISOString().slice(0, 10)
-            : task.completionDate,
+          completionDate: !task.completed ? localISOTime : task.completionDate,
         };
       }
       return task;
