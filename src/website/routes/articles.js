@@ -23,8 +23,9 @@ function Articles(props) {
 
     // Sorting by date, newest first
     const sortedArticles = filteredArticles.sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
+      (a, b) => new Date(b.data.date) - new Date(a.data.date)
     );
+    
     setDisplayedArticles(sortedArticles);
   }, [searchQuery]);
 
