@@ -16,7 +16,7 @@
   "summary": "This article explores the concept of time-based maintenance in software, a model where maintenance tasks are performed at predetermined intervals. It highlights the simplicity and cost-effectiveness of this model, using Windows 10's regular updates as an example of its practical benefits. The discussion also covers the importance of timing in maintenance activities to balance the risk of software breakage against the need for timely interventions, and concludes that while time-based maintenance may not suit every scenario, it offers significant advantages for systems where reliability and longevity are critical. By focusing on reducing maintenance costs without compromising software usability, time-based maintenance emerges as a viable strategy for extending the life of software projects.",
   "date": "April 22, 2022",
   "hidden": false,
-  "labels": ["self", "software"],
+  "labels": ["Self", "Software"],
   "content": [
     {
       "type": "paragraph",
