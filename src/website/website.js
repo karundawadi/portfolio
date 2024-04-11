@@ -14,6 +14,7 @@ import {
 import CssBaseline from '@mui/material/CssBaseline';
 import TaskManager from "../projects/taskManager/src/taskManager";
 import BlogRenderer from "./bodyComponents/blogs/BlogRenderer";
+import StockSnapshot from "../projects/stockSnapshot/src/stockSnapshot";
 import { AllBlogs } from "./bodyComponents/blogs/AllBlogs";
 
 function WebSite() {
@@ -37,6 +38,7 @@ function WebSite() {
                             element={<BlogRenderer articleData={article.data} changeMode={changeDarkMode} dark={darkMode}/>} />
                     ))}
                     <Route path="taskManager" element={<TaskManager title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="stockSnapshot" element={<StockSnapshot title={"Stock Snapshot"} changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
         </HashRouter>
