@@ -16,6 +16,7 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
   const [pomodoroCount, setPomodoroCount] = useState(0);
   const [taskNotes, setTaskNotes] = useState("");
   const worker = useRef(); // Web worker
+  const wakeLock = useRef(null); // Wake lock reference
 
   const alertSound = useMemo(
     () =>
@@ -66,6 +67,11 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
       interval = setInterval(() => {
         setSeconds((secs) => secs - 1);
       }, 1000);
+
+      // Request a wake lock when the timer starts
+      navigator.wakeLock.request("screen").then((lock) => {
+        wakeLock.current = lock;
+      });
     } else if (!isActive || seconds === 0) {
       clearInterval(interval);
       if (seconds === 0) {
@@ -78,6 +84,12 @@ const PomodoroBox = ({ selectedTask, updateTask }) => {
           updateTask(updatedTask);
         }
         switchMode(`short break`);
+      }
+
+      // Release the wake lock when the timer stops
+      if (wakeLock.current !== null) {
+        wakeLock.current.release();
+        wakeLock.current = null;
       }
     }
     return () => clearInterval(interval);
