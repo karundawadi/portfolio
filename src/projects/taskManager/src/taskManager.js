@@ -39,7 +39,7 @@ import { Helmet } from "react-helmet";
 import { v4 as uuidv4 } from "uuid";
 
 function TaskManager(props) {
-  const VERSION_NUMBER = "1.0.7";
+  const VERSION_NUMBER = "1.0.8";
   const [taskName, setTaskName] = useState("");
   const [taskEstimate, setTaskEstimate] = useState("");
   const [tasks, setTasks] = useState(
@@ -119,23 +119,21 @@ function TaskManager(props) {
     setDialogOpen(false);
   };
 
-  const handleCompleteTask = (index) => {
-    const newTasks = tasks.map((task, i) => {
-      if (i === index) {
-        const today = new Date();
-        const offset = today.getTimezoneOffset() * 60000; // Offset in milliseconds
-        const localISOTime = (new Date(today - offset)).toISOString().slice(0, 10);
-  
+  const handleCompleteTask = (taskId) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        // Toggle the completion status and set the completion date if completing the task
         return {
           ...task,
           completed: !task.completed,
-          completionDate: !task.completed ? localISOTime : task.completionDate,
+          completionDate: !task.completed ? new Date().toISOString().slice(0, 10) : null,
         };
       }
       return task;
     });
-    setTasks(newTasks);
+    setTasks(updatedTasks);
   };
+  
 
   const handleOpenEditDialog = (task, index) => {
     setEditableTask({ ...task, index });
@@ -362,7 +360,7 @@ function TaskManager(props) {
                           >
                             <Checkbox
                               checked={task.completed}
-                              onChange={() => handleCompleteTask(index)}
+                              onChange={() => handleCompleteTask(task.id)}
                             />
                             <ListItemText
                               primary={task.name}
