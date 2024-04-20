@@ -16,6 +16,7 @@ import TaskManager from "../projects/taskManager/src/taskManager";
 import BlogRenderer from "./bodyComponents/blogs/BlogRenderer";
 import StockSnapshot from "../projects/stockSnapshot/src/stockSnapshot";
 import { AllBlogs } from "./bodyComponents/blogs/AllBlogs";
+import TaskMangerRewritten from "../projects/taskManagerRewritten/app/app";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -39,6 +40,7 @@ function WebSite() {
                     ))}
                     <Route path="taskManager" element={<TaskManager title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
                     <Route path="stockSnapshot" element={<StockSnapshot title={"Stock Snapshot"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                    <Route path="taskManagerRewritten" element={<TaskMangerRewritten title={"Task Manager Rewritten"} changeMode={changeDarkMode} dark={darkMode}/>} />
                 </Routes>
             </ThemeProvider>
         </HashRouter>

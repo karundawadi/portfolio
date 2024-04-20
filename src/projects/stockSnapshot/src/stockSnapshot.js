@@ -29,7 +29,6 @@ function StockSnapshot() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isMd = useMediaQuery(theme.breakpoints.up("md"));
 
   const handleChange = (event) => {
     setPrice(event.target.value);
