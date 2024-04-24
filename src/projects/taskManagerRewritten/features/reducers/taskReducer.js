@@ -1,27 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  taskName: '',
-  taskEstimate: '',
+  taskName: "",
+  taskEstimate: "",
   tasks: [],
-}
+};
 
 export const counterSlice = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState,
   reducers: {
     setTaskName: (state, action) => {
-        state.taskName = action.payload
+      state.taskName = action.payload;
     },
     setTaskEstimate: (state, action) => {
-        state.taskEstimate = action.payload
+      state.taskEstimate = action.payload;
     },
     setTasks: (state, action) => {
-        state.tasks = action.payload
+      state.tasks = action.payload;
     },
   },
-})
+});
 
-export const { setTaskName, setTaskEstimate, setTasks } = counterSlice.actions
+export const { setTaskName, setTaskEstimate, setTasks } = counterSlice.actions;
 
-export default counterSlice.reducer
+export default counterSlice.reducer;

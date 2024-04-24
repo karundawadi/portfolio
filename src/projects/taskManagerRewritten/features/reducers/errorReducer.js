@@ -1,22 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   error: false,
-}
+};
 
 export const counterSlice = createSlice({
-  name: 'tasks',
+  name: "errors",
   initialState,
   reducers: {
     setError: (state) => {
-        state.error = true
+      state.error = true;
     },
     removeError: (state) => {
-        state.error = false
-    }
+      state.error = false;
+    },
   },
-})
+});
 
-export const { setError, removeError } = counterSlice.actions
+export const { setError, removeError } = counterSlice.actions;
 
-export default counterSlice.reducer
+export default counterSlice.reducer;

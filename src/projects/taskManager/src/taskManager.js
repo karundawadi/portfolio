@@ -321,6 +321,7 @@ function TaskManager(props) {
               </Box>
             </Box>
           </form>
+          {/* Copy point moved here  */}
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="tasks">
               {(provided) => (

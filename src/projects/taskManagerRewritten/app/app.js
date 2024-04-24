@@ -3,12 +3,12 @@ import {store} from '../store/store.js';
 import { Provider } from 'react-redux'
 import TaskManager from "../components/taskManager.js";
 
-function TaskMangerRewritten(props) {
+function TaskManagerRewritten(props) {
     return (
-        <Provider store={store}>
-            <TaskManager props={props}/>
+        <Provider store={store} props={props}>
+            <TaskManager {...props}/>
         </Provider>
     )
 }
 
-export default TaskMangerRewritten;
+export default TaskManagerRewritten;
