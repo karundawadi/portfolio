@@ -19,9 +19,12 @@ export const counterSlice = createSlice({
     setTasks: (state, action) => {
       state.tasks = action.payload;
     },
+    deleteAllTasks: (state) => {
+      state.tasks = [];
+    }
   },
 });
 
-export const { setTaskName, setTaskEstimate, setTasks } = counterSlice.actions;
+export const { setTaskName, setTaskEstimate, setTasks, deleteAllTasks } = counterSlice.actions;
 
 export default counterSlice.reducer;

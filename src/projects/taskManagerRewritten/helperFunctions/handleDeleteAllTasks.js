@@ -1,9 +1,9 @@
 import { setShowDialog } from "../features/reducers/stateReducer";
 import {
-    setTasks,
+    deleteAllTasks,
 } from "../features/reducers/taskReducer";
 
 export const handleDeleteAllTasks = (dispatch) => {
-  dispatch(setTasks([]));
+  dispatch(deleteAllTasks());
   dispatch(setShowDialog(false));
 };
