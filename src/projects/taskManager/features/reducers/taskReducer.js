@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   taskName: "",
   taskEstimate: "",
-  tasks: [],
+  tasks: JSON.parse(localStorage.getItem("tasks")) || [],
 };
 
 export const counterSlice = createSlice({
@@ -18,13 +18,16 @@ export const counterSlice = createSlice({
     },
     setTasks: (state, action) => {
       state.tasks = action.payload;
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     deleteAllTasks: (state) => {
+      localStorage.setItem("tasks", JSON.stringify([]));
       state.tasks = [];
-    }
+    },
   },
 });
 
-export const { setTaskName, setTaskEstimate, setTasks, deleteAllTasks } = counterSlice.actions;
+export const { setTaskName, setTaskEstimate, setTasks, deleteAllTasks } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;

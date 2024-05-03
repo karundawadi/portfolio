@@ -65,7 +65,6 @@ function TaskManager(props) {
   const error = useSelector((state) => state.errorReducer.error);
   const editableTask = useSelector((state) => state.stateReducer.editableTask);
   const modalOpen = useSelector((state) => state.stateReducer.openModal);
-  const selectedTask = useSelector((state) => state.stateReducer.selectedTask);
   const editDialogOpen = useSelector(
     (state) => state.stateReducer.isEditDialogOpen
   );
@@ -112,10 +111,15 @@ function TaskManager(props) {
               type="file"
               id="fileInput"
               style={{ display: "none" }}
-              onChange={handleImportTasks}
+              onChange={(event) => {
+                handleImportTasks(event, window);
+                window.location.reload();
+              }}
             />
             <Button
-              onClick={() => document.getElementById("fileInput").click()}
+              onClick={() => {
+                document.getElementById("fileInput").click();
+              }}
               startIcon={<CloudUploadIcon />}
             >
               Import
@@ -187,7 +191,7 @@ function TaskManager(props) {
                     primary={task.name}
                     secondary={`Estimated: ${task.estimate}, Worked: ${task.pomodoroWorked}`}
                     onClick={() => {
-                      dispatch(setSelectedTask(task))
+                      dispatch(setSelectedTask(task));
                       dispatch(setOpenModal(true));
                     }}
                   />
@@ -209,6 +213,18 @@ function TaskManager(props) {
                   >
                     <DeleteIcon />
                   </IconButton>
+                  <Modal
+                    open={modalOpen}
+                    onClose={() => {
+                      dispatch(setOpenModal(false));
+                    }}
+                  >
+                    <PomodoroBox
+                      onClick={() => {
+                        dispatch(setSelectedTask(task));
+                      }}
+                    />
+                  </Modal>
                 </ListItem>
               ))}
           </List>
@@ -241,18 +257,6 @@ function TaskManager(props) {
             >
               <DeleteIcon fontSize="large" />
             </IconButton>
-            <Modal
-              open={modalOpen}
-              onClose={() => {
-                dispatch(setOpenModal(false));
-              }}
-            >
-              <PomodoroBox
-                dispatch={dispatch}
-                key={selectedTask?.id}
-                selectedTask={selectedTask}
-              />
-            </Modal>
             <Snackbar
               open={error}
               autoHideDuration={6000}

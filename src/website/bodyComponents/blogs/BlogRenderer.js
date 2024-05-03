@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import FireyComments from "../../../projects/fireyComments/app/app.js";
 
 function renderContentItem(item, index) {
   switch (item.type) {
@@ -128,6 +129,7 @@ function BlogRenderer(props) {
         {props.articleData.content.map((item, index) =>
           renderContentItem(item, index)
         )}
+        <FireyComments articleId={props.articleData.title}/>
         <Footer />
       </Container>
     </Box>

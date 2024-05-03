@@ -33,6 +33,7 @@ export const handleAddTask = (
           name: taskName,
           estimate: taskEstimate,
           pomodoroWorked: 0,
+          estimationError: 0 - taskEstimate,
           completed: false,
           date: localISOTime,
           completionDate: null,

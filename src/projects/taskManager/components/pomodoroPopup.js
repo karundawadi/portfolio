@@ -8,32 +8,38 @@ import {
 } from "@mui/material";
 import { Howl } from "howler";
 import AlertSound from "../resources/alert.wav";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setTasks } from "../features/reducers/taskReducer";
 import { setSelectedTask } from "../features/reducers/stateReducer";
 
-const PomodoroBox = ({ dispatch, selectedTask }) => {
-  const [seconds, setSeconds] = useState(1500); // 25 minutes
-  const [isActive, setIsActive] = useState(false);
-  const [mode, setMode] = useState("work"); // Modes: 'work', 'short break', 'long break', 'pomodoro'
+const PomodoroBox = () => {
+  const webWorker = useRef();
+  const durations = {
+    pomodoro: 1500, // 25 minutes
+    "short break": 300, // 5 minutes
+    "long break": 900, // 15 minutes
+  };
+
+  const [seconds, setSeconds] = useState(durations["pomodoro"]);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [mode, setMode] = useState("pomodoro");
   const [pomodoroCount, setPomodoroCount] = useState(0);
   const [taskNotes, setTaskNotes] = useState("");
-  const worker = useRef(); // Web worker
-  const wakeLock = useRef(null); // Wake lock reference
+
+  const dispatch = useDispatch();
   const tasks = useSelector((state) => state.taskReducer.tasks);
+  const selectedTask = useSelector((state) => state.stateReducer.selectedTask);
 
   const updateTask = (newTask) => {
     const newTasks = tasks.map((task) => {
       if (task.id === newTask.id) {
+        newTask.estimationError = newTask.estimate - newTask.pomodoroWorked;
+        dispatch(setSelectedTask(newTask));
         return newTask;
       }
       return task;
     });
     dispatch(setTasks(newTasks));
-
-    if (selectedTask && selectedTask.id === newTask.id) {
-      dispatch(setSelectedTask(newTask));
-    }
   };
 
   const alertSound = useMemo(
@@ -45,80 +51,10 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
     []
   );
 
-  useEffect(() => {
-    // Load saved notes when the selected task changes
-    if (selectedTask) {
-      const savedNotes = localStorage.getItem(selectedTask.name);
-      setTaskNotes(savedNotes || "");
-    }
-  }, [selectedTask]);
-
-  useEffect(() => {
-    // Automatically save notes when they change
-    if (selectedTask) {
-      localStorage.setItem(selectedTask.name, taskNotes);
-    }
-  }, [taskNotes, selectedTask]);
-
-  useEffect(() => {
-    worker.current = new Worker(`${process.env.PUBLIC_URL}/timerWorker.js`);
-
-    worker.current.onmessage = (e) => {
-      if (e.data.type === "tick") {
-        setSeconds(Math.ceil(e.data.remainingTime / 1000));
-      } else if (e.data.type === "finished") {
-        // handle the end of the timer
-        endPomodoroSession();
-      }
-    };
-
-    // Cleanup
-    return () => {
-      worker.current.terminate();
-    };
-  }, []);
-
-  useEffect(() => {
-    let interval = null;
-
-    if (isActive && seconds > 0) {
-      interval = setInterval(() => {
-        setSeconds((secs) => secs - 1);
-      }, 1000);
-
-      // Request a wake lock when the timer starts
-      navigator.wakeLock.request("screen").then((lock) => {
-        wakeLock.current = lock;
-      });
-    } else if (!isActive || seconds === 0) {
-      clearInterval(interval);
-      if (seconds === 0) {
-        alertSound.play();
-        if (mode === "work" || mode === "pomodoro") {
-          const updatedTask = {
-            ...selectedTask,
-            pomodoroWorked: selectedTask.pomodoroWorked + 1,
-          };
-          updateTask(updatedTask);
-        }
-        switchMode(`short break`);
-      }
-
-      // Release the wake lock when the timer stops
-      if (wakeLock.current !== null) {
-        wakeLock.current.release();
-        wakeLock.current = null;
-      }
-    }
-    return () => clearInterval(interval);
-  }, [isActive, seconds, mode, selectedTask, updateTask, alertSound]);
-
   const endPomodoroSession = () => {
-    // Play the alert sound
     alertSound.play();
 
-    // Update the task with an additional completed Pomodoro, if applicable
-    if (mode === "work" || mode === "pomodoro") {
+    if (mode === "pomodoro") {
       const updatedTask = {
         ...selectedTask,
         pomodoroWorked: selectedTask.pomodoroWorked + 1,
@@ -126,81 +62,101 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
       updateTask(updatedTask);
     }
 
-    // Determine the next mode based on the current mode and number of Pomodoros completed
     let nextMode;
-    if (mode === "work" || mode === "pomodoro") {
+    if (mode === "pomodoro") {
       if (pomodoroCount % 4 === 3) {
-        // Typically after every 4 pomodoros, a longer break is taken
         nextMode = "long break";
       } else {
         nextMode = "short break";
       }
       setPomodoroCount(pomodoroCount + 1);
     } else {
-      // If currently in a break, switch back to work mode
-      nextMode = "work";
+      nextMode = "pomodoro";
     }
-
-    // Switch to the next mode
     switchMode(nextMode);
-
-    // Reset the timer for the next session
     reset(nextMode);
   };
 
-  const toggle = () => {
-    setIsActive(!isActive);
-    if (worker.current) {
-      const command = isActive ? "stop" : "start";
-      const duration = !isActive ? seconds * 1000 : undefined; // Convert seconds to milliseconds only if starting
-      worker.current.postMessage({ command, duration });
-    }
-  };
-
   const reset = useCallback(
-    (mode = "work") => {
-      const durations = {
-        work: 1500, // 25 minutes
-        "short break": 300, // 5 minutes
-        "long break": 900, // 15 minutes
-        pomodoro: 1500, // 25 minutes (same as work for simplicity)
-      };
+    (mode = "pomodoro") => {
       setSeconds(durations[mode]);
-      setIsActive(false);
-      // If the worker is active, send a stop command
-      if (worker.current) {
-        worker.current.postMessage({ command: "stop" });
+      setIsTimerActive(false);
+      if (webWorker.current) {
+        webWorker.current.postMessage({ command: "stop" });
       }
     },
-    [worker]
+    [webWorker]
   );
 
   const switchMode = useCallback(
     (newMode) => {
-      if (newMode === "pomodoro") {
-        setPomodoroCount(0);
-      }
       setMode(newMode);
       reset(newMode);
     },
     [reset]
   );
 
-  useEffect(() => {
-    if (mode === "pomodoro") {
-      if (seconds === 0 && pomodoroCount % 4 === 0) {
-        switchMode("long break");
-      } else if (seconds === 0) {
-        switchMode("short break");
-      }
-    }
-  }, [seconds, mode, pomodoroCount, switchMode]);
-
   const formatTime = () => {
     const minutes = Math.floor(seconds / 60);
     const secondsLeft = seconds % 60;
     return `${minutes}:${secondsLeft < 10 ? "0" : ""}${secondsLeft}`;
   };
+
+  const toggle = () => {
+    setIsTimerActive(!isTimerActive);
+    if (webWorker.current) {
+      const command = isTimerActive ? "stop" : "start";
+      const duration = !isTimerActive ? seconds * 1000 : undefined;
+      webWorker.current.postMessage({ command, duration });
+    }
+  };
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isTimerActive && seconds > 0) {
+      interval = setInterval(() => {
+        setSeconds((secs) => secs - 1);
+      }, 1000);
+    } else if (!isTimerActive || seconds === 0) {
+      clearInterval(interval);
+      if (seconds === 0) {
+        alertSound.play();
+        if (mode === "pomodoro") {
+          endPomodoroSession();
+        }
+        switchMode(`short break`);
+      }
+    }
+    return () => clearInterval(interval);
+  }, [isTimerActive, seconds, mode, selectedTask, alertSound]);
+
+  useEffect(() => {
+    webWorker.current = new Worker(`${process.env.PUBLIC_URL}/timerWorker.js`);
+
+    webWorker.current.onmessage = (e) => {
+      if (e.data.type === "tick") {
+        setSeconds(Math.ceil(e.data.remainingTime / 1000));
+      }
+    };
+
+    return () => {
+      webWorker.current.terminate();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (selectedTask) {
+      const savedNotes = localStorage.getItem(selectedTask.name);
+      setTaskNotes(savedNotes || "");
+    }
+  }, [selectedTask]);
+
+  useEffect(() => {
+    if (selectedTask) {
+      localStorage.setItem(selectedTask.name, taskNotes);
+    }
+  }, [taskNotes, selectedTask]);
 
   return (
     <Box
@@ -224,7 +180,11 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
       <Typography variant="h5" component="h2" textAlign={"center"}>
         {selectedTask && selectedTask.name}
       </Typography>
-      <Typography variant="body1" textAlign={"center"}>
+      <Typography
+        style={{ paddingTop: "1%" }}
+        variant="body1"
+        textAlign={"center"}
+      >
         {`Pomodoro Estimated: ${selectedTask.estimate}`}
       </Typography>
       <Typography variant="body1" textAlign={"center"}>
@@ -232,9 +192,9 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
       </Typography>
       <Typography variant="body1" textAlign={"center"}>
         {`Estimation Error: ${
-          selectedTask.pomodoroWorked !== 0
-            ? selectedTask.pomodoroWorked - selectedTask.estimate
-            : 0
+          selectedTask.estimationError < 0
+            ? -selectedTask.estimationError
+            : selectedTask.estimationError
         }`}
       </Typography>
 
@@ -242,7 +202,7 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
         <CircularProgress
           color="success"
           variant="determinate"
-          value={(seconds / 1500) * 100}
+          value={(seconds / 1500) * 100} // Change seconds here
           size={200}
         />
         <Box
@@ -277,20 +237,10 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
           value={taskNotes}
           onChange={(e) => setTaskNotes(e.target.value)}
         />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          gap: 1,
-          justifyContent: "center",
-          mt: 3,
-        }}
-      >
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
+            flexDirection: "row",
             gap: 1,
             justifyContent: "center",
             mt: 3,
@@ -299,44 +249,57 @@ const PomodoroBox = ({ dispatch, selectedTask }) => {
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: "column",
               gap: 1,
               justifyContent: "center",
               mt: 3,
             }}
           >
-            <Button variant="outlined" onClick={() => switchMode("pomodoro")}>
-              Pomodoro
-            </Button>
-            <Button
-              variant="outlined"
-              onClick={() => switchMode("short break")}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 1,
+                justifyContent: "center",
+                mt: 3,
+              }}
             >
-              Short Break
-            </Button>
-            <Button variant="outlined" onClick={() => switchMode("long break")}>
-              Long Break
-            </Button>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              gap: 1,
-              justifyContent: "center",
-              mt: 3,
-            }}
-          >
-            <Button variant="contained" color="primary" onClick={toggle}>
-              {isActive ? "Pause" : "Start"}
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => reset(mode)}
+              <Button variant="outlined" onClick={() => switchMode("pomodoro")}>
+                Pomodoro
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => switchMode("short break")}
+              >
+                Short Break
+              </Button>
+              <Button
+                variant="outlined"
+                onClick={() => switchMode("long break")}
+              >
+                Long Break
+              </Button>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 1,
+                justifyContent: "center",
+                mt: 3,
+              }}
             >
-              Reset
-            </Button>
+              <Button variant="contained" color="primary" onClick={toggle}>
+                {isTimerActive ? "Pause" : "Start"}
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => reset(mode)}
+              >
+                Reset
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
