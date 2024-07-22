@@ -11,8 +11,7 @@ export const AllBlogs = [
     {path: 'reflection2023', data: reflection2023},
     {path: 'reflection2022', data: reflection2022},
 ];
-
 export const ArticlesExcludedFromComments = [
     reflection2023.title,
-    reflection2022.title
-]
+    reflection2022.title,
+];

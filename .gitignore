@@ -27,3 +27,4 @@ build/
 .idea/modules.xml
 .idea/portfolio.iml
 config.js
+AllBlogs.js

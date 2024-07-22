@@ -18,6 +18,7 @@ import { AllBlogs } from "./bodyComponents/blogs/AllBlogs";
 import TaskManagerComponent from "../projects/taskManager/app/app";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { AuthProvider } from "../projects/fireyComments/reducers/firebaseSDK/AuthContext";
 
 function WebSite() {
     const [darkMode,changeDarkMode] = React.useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -31,18 +32,20 @@ function WebSite() {
                         },
                     })}>
                     <CssBaseline />
-                    <Routes>
-                        <Route path="/" element={<About changeMode={changeDarkMode} dark={darkMode}/>} />
-                        <Route path="article" element={<Articles changeMode={changeDarkMode} dark={darkMode}/>} />
-                        <Route path="project" element={<Projects changeMode={changeDarkMode} dark={darkMode}/>} />
-                        {AllBlogs.map(article => (
-                            <Route key={article.path} 
-                                path={`article/${article.path}`} 
-                                element={<BlogRenderer articleData={article.data} changeMode={changeDarkMode} dark={darkMode}/>} />
-                        ))}
-                        <Route path="stockSnapshot" element={<StockSnapshot title={"Stock Snapshot"} changeMode={changeDarkMode} dark={darkMode}/>} />
-                        <Route path="taskManager" element={<TaskManagerComponent title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
-                    </Routes>
+                    <AuthProvider>
+                        <Routes>
+                            <Route path="/" element={<About changeMode={changeDarkMode} dark={darkMode}/>} />
+                            <Route path="article" element={<Articles changeMode={changeDarkMode} dark={darkMode}/>} />
+                            <Route path="project" element={<Projects changeMode={changeDarkMode} dark={darkMode}/>} />
+                            {AllBlogs.map(article => (
+                                <Route key={article.path} 
+                                    path={`article/${article.path}`} 
+                                    element={<BlogRenderer articleData={article.data} changeMode={changeDarkMode} dark={darkMode}/>} />
+                            ))}
+                            <Route path="stockSnapshot" element={<StockSnapshot title={"Stock Snapshot"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                            <Route path="taskManager" element={<TaskManagerComponent title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                        </Routes>
+                    </AuthProvider>
                 </ThemeProvider>
             </HashRouter>
         </Provider>

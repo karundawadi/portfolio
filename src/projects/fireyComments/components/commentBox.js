@@ -1,3 +1,4 @@
+// components/CommentBox.js
 import React, { useState } from "react";
 import {
   TextField,
@@ -13,18 +14,17 @@ import { auth, firestore } from "../reducers/firebaseSDK/app";
 import { useDispatch } from "react-redux";
 import { getComments } from "../helperFunctions/getComments.js";
 import { setComments } from "../reducers/commentReducer.js";
+import { useAuth } from "../reducers/firebaseSDK/AuthContext";
 
-const CommentBox = (props) => {
+const CommentBox = ({ articleId }) => {
+  const { currentUser } = useAuth();
   const [comment, setComment] = useState("");
   const [charCount, setCharCount] = useState(0);
-
-  const authState = auth;
-  const fireStoreState = firestore;
-  const [signInWithGoogle, user, loading, error] =
-    useSignInWithGoogle(authState);
   const [openLoading, setOpenLoading] = useState(false);
   const [openError, setOpenError] = useState(false);
   const dispatch = useDispatch();
+
+  const [signInWithGoogle, , loading, error] = useSignInWithGoogle(auth);
 
   const handleChange = (e) => {
     const text = e.target.value;
@@ -32,20 +32,18 @@ const CommentBox = (props) => {
     setCharCount(text.length);
   };
 
-  const handleSend = () => {
-    postComment(
-      fireStoreState,
-      props.articleId,
-      comment,
-      user?.user?.displayName
-    );
-    getComments(firestore).then((comments) => {
-      dispatch(setComments(comments));
-    }).catch((error) => {
-      console.error(error);
-    });
-    setComment("");
-    setCharCount(0);
+  const handleSend = async () => {
+    if (currentUser) {
+      try {
+        await postComment(firestore, articleId, comment, currentUser.displayName);
+        const comments = await getComments(firestore);
+        dispatch(setComments(comments));
+        setComment("");
+        setCharCount(0);
+      } catch (error) {
+        console.error("Error posting comment:", error);
+      }
+    }
   };
 
   const handleSignInWithGoogle = async () => {
@@ -78,10 +76,12 @@ const CommentBox = (props) => {
       <div style={{ maxHeight: "3%", paddingTop: "12px", paddingBottom: "12px" }}>
         <div
           style={{
-            backgroundColor: user ? "" : "#615f5f",
-            opacity: user ? 1 : 0.7,
-            paddingTop: "12px", paddingBottom: "12px",
-            paddingLeft: "4px", paddingRight: "4px"
+            backgroundColor: currentUser ? "" : "#615f5f",
+            opacity: currentUser ? 1 : 0.7,
+            paddingTop: "12px",
+            paddingBottom: "12px",
+            paddingLeft: "4px",
+            paddingRight: "4px",
           }}
         >
           <TextField
@@ -90,13 +90,13 @@ const CommentBox = (props) => {
             fullWidth
             label="Add a comment"
             value={comment}
-            onChange={(e) => handleChange(e)}
-            disabled={!user}
+            onChange={handleChange}
+            disabled={!currentUser}
             helperText={`${charCount}/500`}
           />
         </div>
       </div>
-      {!user && !loading && !error && (
+      {!currentUser && !loading && !error && (
         <Button
           variant="contained"
           disabled={loading || error}
@@ -116,14 +116,14 @@ const CommentBox = (props) => {
           </Typography>
         </Button>
       )}
-      {user && (
+      {currentUser && (
         <IconButton
           onClick={handleSend}
           style={{
             position: "absolute",
             top: "35px",
             right: "12px",
-            visibility: user ? "visible" : "hidden",
+            visibility: currentUser ? "visible" : "hidden",
             zIndex: 1,
           }}
         >

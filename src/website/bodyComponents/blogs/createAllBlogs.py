@@ -12,19 +12,29 @@ if not os.path.isdir(directory_path):
 # Get all JSON files in the directory
 json_files = [f for f in os.listdir(directory_path) if f.endswith('.json')]
 
-# Prepare the content for AllBlogs.js
+# Prepare the content for AllBlogs.js and ArticlesExcludedFromComments
 imports_content = ''
 exports_content = 'export const AllBlogs = [\n'
+excluded_articles_content = 'export const ArticlesExcludedFromComments = [\n'
 
 for json_file in json_files:
     name_of_file = os.path.splitext(json_file)[0]
+    file_path = os.path.join(directory_path, json_file)
+
+    # Read the JSON file to check for "hidden": true
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+        if data.get('hidden', False):
+            excluded_articles_content += f"    {name_of_file}.title,\n"
+
     imports_content += f"import {name_of_file} from './all_blogs/{json_file}';\n"
     exports_content += f"    {{path: '{name_of_file}', data: {name_of_file}}},\n"
 
 exports_content += '];'
+excluded_articles_content += '];'
 
 # Combine imports and exports to form the final content
-all_blogs_content = f"{imports_content}\n{exports_content}"
+all_blogs_content = f"{imports_content}\n{exports_content}\n{excluded_articles_content}"
 
 # Path to save
 path_to_save = 'src/website/bodyComponents/blogs'
