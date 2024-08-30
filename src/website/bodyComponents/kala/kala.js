@@ -31,10 +31,10 @@ function Skills(){
                                 <dd class="col-sm-9">AWS CDK, Back-end for Front-end, Server-less, Django, Flask</dd>
 
                                 <dt class="col-sm-3 text-truncate">Mobile development</dt>
-                                <dd class="col-sm-9">: iOS (Swift, Objective C, RxSwift), React Native, Expo</dd>
+                                <dd class="col-sm-9">iOS (Swift, Objective C, RxSwift), React Native, Expo</dd>
 
                                 <dt class="col-sm-3 text-truncate">Web development</dt>
-                                <dd class="col-sm-9">: React, Angular, Redux, Axios, Bootstrap, HTML, CSS</dd>
+                                <dd class="col-sm-9">React, Angular, Redux, Axios, Bootstrap, HTML, CSS</dd>
 
                                 <dt class="col-sm-3 text-truncate">APIs</dt>
                                 <dd class="col-sm-9">RESTful APIs, GraphQL, Web Sockets</dd>
