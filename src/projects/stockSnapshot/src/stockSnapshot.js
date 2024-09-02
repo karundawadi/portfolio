@@ -165,9 +165,25 @@ function StockSnapshot() {
                             : "transparent",
                       }}
                     >
-                      <TableCell align="center">{percentage}</TableCell>
-                      <TableCell align="center">{values.negative}</TableCell>
-                      <TableCell align="center">{values.positive}</TableCell>
+                      <TableCell align="center" style={{ fontWeight: 'bold' }}>{percentage}</TableCell>
+                      <TableCell
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "lightcoral", // Light red color
+                        }}
+                      >
+                        {values.negative}
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        style={{
+                          fontWeight: "bold",
+                          color: "darkgreen", // Dark green color
+                        }}
+                      >
+                        {values.positive}
+                      </TableCell>
                     </TableRow>
                   )
                 )}
