@@ -16,6 +16,7 @@ import BlogRenderer from "./bodyComponents/blogs/BlogRenderer";
 import StockSnapshot from "../projects/stockSnapshot/src/stockSnapshot";
 import { AllBlogs } from "./bodyComponents/blogs/AllBlogs";
 import TaskManagerComponent from "../projects/taskManager/app/app";
+import MortgageCalculatorComponent from "../projects/mortgageCalculation/app/app";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { AuthProvider } from "../projects/fireyComments/reducers/firebaseSDK/AuthContext";
@@ -42,8 +43,9 @@ function WebSite() {
                                     path={`article/${article.path}`} 
                                     element={<BlogRenderer articleData={article.data} changeMode={changeDarkMode} dark={darkMode}/>} />
                             ))}
-                            <Route path="stockSnapshot" element={<StockSnapshot title={"Stock Snapshot"} changeMode={changeDarkMode} dark={darkMode}/>} />
-                            <Route path="taskManager" element={<TaskManagerComponent title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                            <Route path="stocksnapshot" element={<StockSnapshot title={"Stock Snapshot"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                            <Route path="taskmanager" element={<TaskManagerComponent title={"Task Manager"} changeMode={changeDarkMode} dark={darkMode}/>} />
+                            <Route path="mortgagepayoff" element={<MortgageCalculatorComponent title={"Mortgage Payoff"} changeMode={changeDarkMode} dark={darkMode}/>} />
                         </Routes>
                     </AuthProvider>
                 </ThemeProvider>
