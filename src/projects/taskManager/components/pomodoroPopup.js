@@ -14,11 +14,11 @@ import { setSelectedTask } from "../features/reducers/stateReducer";
 
 const PomodoroBox = () => {
   const webWorker = useRef();
-  const durations = {
+  const durations = useMemo(() => ({
     pomodoro: 1500, // 25 minutes
     "short break": 300, // 5 minutes
     "long break": 900, // 15 minutes
-  };
+  }), []);
 
   const [seconds, setSeconds] = useState(durations["pomodoro"]);
   const [isTimerActive, setIsTimerActive] = useState(false);
@@ -30,7 +30,7 @@ const PomodoroBox = () => {
   const tasks = useSelector((state) => state.taskReducer.tasks);
   const selectedTask = useSelector((state) => state.stateReducer.selectedTask);
 
-  const updateTask = (newTask) => {
+  const updateTask = useCallback((newTask) => {
     const newTasks = tasks.map((task) => {
       if (task.id === newTask.id) {
         newTask.estimationError = newTask.estimate - newTask.pomodoroWorked;
@@ -40,7 +40,7 @@ const PomodoroBox = () => {
       return task;
     });
     dispatch(setTasks(newTasks));
-  };
+  }, [dispatch, tasks]);
 
   const alertSound = useMemo(
     () =>
@@ -51,7 +51,26 @@ const PomodoroBox = () => {
     []
   );
 
-  const endPomodoroSession = () => {
+  const reset = useCallback(
+    (mode = "pomodoro") => {
+      setSeconds(durations[mode]);
+      setIsTimerActive(false);
+      if (webWorker.current) {
+        webWorker.current.postMessage({ command: "stop" });
+      }
+    },
+    [durations, webWorker]
+  );
+
+  const switchMode = useCallback(
+    (newMode) => {
+      setMode(newMode);
+      reset(newMode);
+    },
+    [reset]
+  );
+
+  const endPomodoroSession = useCallback(() => {
     alertSound.play();
 
     if (mode === "pomodoro") {
@@ -75,26 +94,7 @@ const PomodoroBox = () => {
     }
     switchMode(nextMode);
     reset(nextMode);
-  };
-
-  const reset = useCallback(
-    (mode = "pomodoro") => {
-      setSeconds(durations[mode]);
-      setIsTimerActive(false);
-      if (webWorker.current) {
-        webWorker.current.postMessage({ command: "stop" });
-      }
-    },
-    [webWorker]
-  );
-
-  const switchMode = useCallback(
-    (newMode) => {
-      setMode(newMode);
-      reset(newMode);
-    },
-    [reset]
-  );
+  }, [alertSound, mode, pomodoroCount, selectedTask, switchMode, reset, updateTask]);
 
   const formatTime = () => {
     const minutes = Math.floor(seconds / 60);
@@ -129,7 +129,7 @@ const PomodoroBox = () => {
       }
     }
     return () => clearInterval(interval);
-  }, [isTimerActive, seconds, mode, selectedTask, alertSound]);
+  }, [isTimerActive, seconds, mode, selectedTask, alertSound, endPomodoroSession, switchMode]);
 
   useEffect(() => {
     webWorker.current = new Worker(`${process.env.PUBLIC_URL}/timerWorker.js`);

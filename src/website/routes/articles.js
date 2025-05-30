@@ -66,7 +66,7 @@ function Articles(props) {
           onClick={() => {
             window.open("/", "_self");
           }}
-          fontWeight={335}
+          fontWeight={500}
           align={"center"}
         >
           Karun Dawadi
@@ -144,21 +144,26 @@ function Articles(props) {
         {labelFilter && (
           <Box sx={{ mb: 2, paddingTop: "2%" }}>
             <Button
-              variant="contained"
-              color="info"
+              variant="outlined"
               onClick={() => setLabelFilter("")}
               sx={{
                 fontSize: "0.875rem",
-                padding: "6px 16px",
-                borderRadius: "4px",
+                padding: "8px 16px",
+                borderRadius: "8px",
                 textTransform: "none",
-                margin: "8px 0", // Adjust as needed for your layout
-                "&:hover": {
-                  backgroundColor: "primary.dark", // Adjust for a darker shade on hover
-                },
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                fontWeight: 500,
+                borderColor: 'text.primary',
+                color: 'text.primary',
+                '&:hover': {
+                  borderColor: 'text.primary',
+                  backgroundColor: 'action.hover'
+                }
               }}
             >
-              Clear label filter: {labelFilter}
+              Clear filter: {labelFilter}
             </Button>
           </Box>
         )}
@@ -172,8 +177,50 @@ function Articles(props) {
                   key={article.path}
                   onClick={() => navigate(article.path)}
                 >
-                  <TableCell align="left">{article.data.title}</TableCell>
-                  <TableCell align="right">
+                  <TableCell align="left">
+                    <Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
+                        <Typography variant="h6">{article.data.title}</Typography>
+                        <Typography 
+                          variant="caption" 
+                          sx={{ 
+                            color: 'text.secondary',
+                            backgroundColor: 'action.hover',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '0.75rem'
+                          }}
+                        >
+                          {new Date(article.data.date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric"
+                          })}
+                        </Typography>
+                      </Box>
+                      {article.data.summary && (
+                        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                          {article.data.summary}
+                        </Typography>
+                      )}
+                      {article.data.labels && article.data.labels.length > 0 && (
+                        <Box sx={{ mt: 1 }}>
+                          {article.data.labels.map((label) => (
+                            <Chip
+                              key={label}
+                              label={label}
+                              size="small"
+                              onClick={() => handleLabelClick(label)}
+                              style={{ marginRight: "8px", marginBottom: "8px" }}
+                              variant={label === labelFilter ? "outlined" : "default"}
+                            />
+                          ))}
+                        </Box>
+                      )}
+                    </Box>
+                  </TableCell>
+                  <TableCell align="right" sx={{ display: 'none' }}>
+                    {/* Hiding the old date column */}
                     {new Date(article.data.date).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",

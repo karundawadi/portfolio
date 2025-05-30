@@ -18,7 +18,7 @@ function Projects(props) {
                     onClick={()=>{
                         window.open("/","_self")
                     }} 
-                    fontWeight={335} 
+                    fontWeight={500} 
                     align={'center'}
                     >Karun Dawadi</Typography>
                 <ProjectRow dark={props.dark} changeMode={props.changeMode}/>

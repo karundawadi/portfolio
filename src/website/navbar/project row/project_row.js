@@ -13,7 +13,8 @@ function ProjectRow(props) {
                     <Nav.Link>
                         <Link style={{
                             textDecoration:'none',
-                            color:props.dark?"white":'black'
+                            color:props.dark?"white":'black',
+                            fontWeight: 500
                         }} to="/article">
                             Articles
                         </Link>
@@ -21,7 +22,8 @@ function ProjectRow(props) {
                     <Nav.Link>
                         <Link style={{
                             textDecoration:'none',
-                            color:props.dark?"white":'black'
+                            color:props.dark?"white":'black',
+                            fontWeight: 500
                         }}
                         to="/project">
                             Projects
@@ -30,7 +32,8 @@ function ProjectRow(props) {
                     <Nav.Link>
                         <Link style={{
                             textDecoration:'none',
-                            color:props.dark?"white":'black'
+                            color:props.dark?"white":'black',
+                            fontWeight: 500
                         }} 
                         to="/">
                             About Me

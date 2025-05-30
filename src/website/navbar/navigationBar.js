@@ -18,7 +18,7 @@ function NavigationBar(props) {
                         onClick={()=>{
                             window.open("/","_self")
                         }} 
-                        fontWeight={335} 
+                        fontWeight={500} 
                         >Karun Dawadi</Typography>
                     </Grid>
                     <Grid item xs={12}>
